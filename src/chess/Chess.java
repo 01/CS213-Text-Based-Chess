@@ -8,6 +8,8 @@ public class Chess {
 
     public static void main( String[] args ) throws IOException {
         createBoard();
+        printBoard();
+        
     }
 
     public static void createBoard(){
@@ -38,7 +40,8 @@ public class Chess {
             board [i][0] = tiles[i];
             board [i][1] = places[i];
         }
-
+    }
+    public static void printBoard(){
         for(int j = board.length-1; j>=0; j--) {
             System.out.print(board[j][1]+" ");
             if (j%8==0)
