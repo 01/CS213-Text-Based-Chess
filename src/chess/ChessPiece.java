@@ -3,7 +3,7 @@ package chess;
 /**
  * Created by xbbl7mk on 3/3/2017.
  */
-public class ChessPiece {
+public abstract class ChessPiece {
 
     private String name;
     private int row;
