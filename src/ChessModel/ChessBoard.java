@@ -74,9 +74,6 @@ public class ChessBoard extends GameBoard{
 
 	}
 	
-	public int[] convertToCoordinate(String RankandFile) {
-		
-	}
 	
 	public void printChessBoardEmpty() {
 		for(int i = 0; i < rows; i++) {
@@ -84,6 +81,35 @@ public class ChessBoard extends GameBoard{
 			for(int k =0; k < columns; k++) {
 				System.out.print(this.chessBoard[i][k].file +""+ this.chessBoard[i][k].rank + " ");
 	
+			}
+		}
+	}
+	/* pieceInPath assumes valid move for ChessPiece type */
+	public boolean pieceInPath(String start, String end, char pieceType) {
+		if(pieceType == 'R') {
+			int [] startCoordinates = ChessHelper.stringToCoordinate(start);
+			int [] endCoordinates = ChessHelper.stringToCoordinate(end);
+			if(startCoordinates[0] == endCoordinates[0]) {	// Moving Horizontally
+				if(startCoordinates[1] < endCoordinates[1]) {
+					for(int k = (startCoordinates[1]+1); k < endCoordinates[1]; k++) {
+						if(this.chessBoard[startCoordinates[0]][k].piece != null) return true;
+					}
+					return false;
+				}
+				else {
+					for(int k = (endCoordinates[1] + 1; k < startCoordinates[1]; k++){
+						if(this.chessBoard[startCoordinates[0]][k].piece != null) return true;
+					}
+					return false;
+				}
+			}
+			else {	// Moving Vertically
+			if(startCoordinates[0] < endCoordinates[0]) {
+				for(int i = (startCoordinates[0] + 1); i < endCoordinates[0]; i++ ) {
+					if(this.chessBoard[i][])
+				}
+				
+			}
 			}
 		}
 	}

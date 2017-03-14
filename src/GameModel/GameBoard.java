@@ -12,11 +12,15 @@ public abstract class GameBoard {
 	}
 	
 	public void initializeEmptyBoard() {
-		GameBoard = new BoardSquare[rows][columns];
+		this.GameBoard = new BoardSquare[rows][columns];
 		for(int i = 0; i < rows; i++) {
 			for(int k =0; k < columns; k++) {
-				GameBoard[i][k] = new BoardSquare(i, k, null);
+				this.GameBoard[i][k] = new BoardSquare(i, k, null);
 			}
 		}
 	}
+	
+	  public boolean isPieceInPath(int [] start, int [] end) {
+		  return false;
+	    }
 }

@@ -27,4 +27,6 @@ public abstract class ChessPiece extends GamePiece {
     	if(File < 'a' || File > 'f') return false;
     	return true;	
     }
+    
+  
 }
