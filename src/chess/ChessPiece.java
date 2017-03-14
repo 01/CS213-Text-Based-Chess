@@ -3,42 +3,22 @@ package chess;
 /**
  * Created by xbbl7mk on 3/3/2017.
  */
-public abstract class ChessPiece {
+public abstract class ChessPiece extends GamePiece {
 
     private String name;
-    private int row;
-    private int col;
+    private char color;
 
-    public ChessPiece(String name, int row, int col) {
+    public ChessPiece(String name, char color) {
         this.name = name;
-        this.row = row;
-        this.col = col;
+        this.color = color;
     }
 
-    public String getName() {
-        return name;
+    public char getColor() {
+        return color;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-
 
 }
