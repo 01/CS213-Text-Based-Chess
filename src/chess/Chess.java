@@ -10,6 +10,7 @@ public class Chess {
     	
     	board = new ChessBoard();
     	board.printChessBoardEmpty();
+    	board.printInitialChessBoard();
         
     }
 

@@ -5,8 +5,10 @@ package chess;
  */
 public class Queen extends ChessPiece {
 
-    public Queen(String name, int row, int col) {
-        super(name, row, col);
+	private static String name = "Queen";
+
+    public Queen(char color) {
+        super(name, color);
     }
 
 }

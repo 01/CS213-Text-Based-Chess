@@ -5,9 +5,9 @@ package chess;
  */
 public class Bishop extends ChessPiece {
 
+	private static String name = "Bishop";
 
-    public Bishop(String name, int row, int col) {
-        super(name, row, col);
+    public Bishop(char color) {
+        super(name, color);
     }
-
 }

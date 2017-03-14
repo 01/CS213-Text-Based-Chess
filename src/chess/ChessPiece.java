@@ -14,11 +14,11 @@ public abstract class ChessPiece extends GamePiece {
     }
 
     public char getColor() {
-        return color;
+        return this.color;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public char getName() {
+    	return this.name.charAt(0);
     }
 
 }

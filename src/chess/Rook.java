@@ -5,7 +5,9 @@ package chess;
  */
 public class Rook extends ChessPiece {
 
-    public Rook(String name, int row, int col) {
-        super(name, row, col);
+	private static String name = "Rook";
+
+    public Rook(char color) {
+        super(name, color);
     }
 }
