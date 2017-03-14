@@ -9,6 +9,14 @@ public abstract class GamePiece {
 		this.color = color;
 	}
 	
+	public char getColor() {
+		return this.color;
+	}
+	
+	public char getNameI() {
+		return this.name.charAt(0);
+	}
+	
 	public boolean isValidMove(){
 		return true;
 	}

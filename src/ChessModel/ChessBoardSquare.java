@@ -6,7 +6,6 @@ import GameModel.BoardSquare;
 public class ChessBoardSquare extends BoardSquare {
 	public char color;
 	public char rank, file;
-	public ChessPiece piece;
 	
 	public ChessBoardSquare(int row, int column, ChessPiece piece, char color) {
 		super(row, column, piece);

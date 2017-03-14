@@ -13,4 +13,11 @@ public class Knight extends ChessPiece {
     public char getName() {
     	return 'N';
     }
+    
+    /* Knight can move to square 2 squres horizontally and one square vertically or 2 squares vertically 1 square horizontally
+     * Knight can jump over other pieces
+     */
+    public boolean isValidMove(String RankandFile0, String RankandFile1) {
+    	if(!(ChessHelper.isValidCoordinates(RankandFile0) || !(ChessHelper.isValidCoordinates(RankandFile1)))) return false;
+    }
 }

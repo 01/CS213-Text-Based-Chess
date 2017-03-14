@@ -7,9 +7,6 @@ import GameModel.GamePiece;
  */
 public abstract class ChessPiece extends GamePiece {
 
-    private String name;
-    private char color;
-
     public ChessPiece(String name, char color) {
         super(name, color);
     }
@@ -18,7 +15,7 @@ public abstract class ChessPiece extends GamePiece {
         return this.color;
     }
 
-    public char getName() {
+    public char getNameI() {
     	return this.name.charAt(0);
     }
     

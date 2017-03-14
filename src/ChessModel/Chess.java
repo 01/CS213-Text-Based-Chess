@@ -1,8 +1,7 @@
-package chess;
+package ChessModel;
+
 import java.io.IOException;
 import java.util.Arrays;
-
-import ChessModel.ChessBoard;
 
 public class Chess {
 
@@ -13,6 +12,8 @@ public class Chess {
     	board = new ChessBoard();
     	board.printChessBoardEmpty();
     	board.printInitialChessBoard();
+    	int[] coordinate = ChessHelper.stringToCoordinate("H8");
+    	System.out.println("\n " + coordinate[0] + "" + coordinate[1] );
         
     }
 

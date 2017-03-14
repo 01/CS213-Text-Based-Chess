@@ -1,11 +1,6 @@
 package ChessModel;
 
-import ChessModel.ChessPieces.Bishop;
-import ChessModel.ChessPieces.King;
-import ChessModel.ChessPieces.Knight;
-import ChessModel.ChessPieces.Pawn;
-import ChessModel.ChessPieces.Queen;
-import ChessModel.ChessPieces.Rook;
+import ChessModel.ChessPieces.*;
 import GameModel.GameBoard;
 
 public class ChessBoard extends GameBoard{
@@ -48,7 +43,7 @@ public class ChessBoard extends GameBoard{
 		// Initialize Pawns
 		for(int i = 0; i < numRanks; i++ ) {
 			this.chessBoard[1][i].piece = new Pawn(BLACK);
-			this.chessBoard[numFiles-2][i].piece = new Pawn(BLACK);
+			this.chessBoard[numFiles-2][i].piece = new Pawn(WHITE);
 		}
 		
 		// Initiaze Rooks
@@ -79,6 +74,10 @@ public class ChessBoard extends GameBoard{
 
 	}
 	
+	public int[] convertToCoordinate(String RankandFile) {
+		
+	}
+	
 	public void printChessBoardEmpty() {
 		for(int i = 0; i < rows; i++) {
 			System.out.println("");
@@ -95,7 +94,7 @@ public class ChessBoard extends GameBoard{
 		for(int i = 0; i < rows; i++) {
 			System.out.println("");
 			for(int k =0; k < columns; k++) {
-				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getName() + " ");
+				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getNameI() + " ");
 				else if(this.chessBoard[i][k].color == 'B')System.out.print("## ");
 				else System.out.print("   ");
 			}
