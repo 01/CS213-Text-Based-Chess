@@ -1,4 +1,4 @@
-package chess;
+package GameModel;
 
 public class BoardSquare{
 	public GamePiece piece;

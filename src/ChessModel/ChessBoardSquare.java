@@ -1,4 +1,7 @@
-package chess;
+package ChessModel;
+
+import ChessModel.ChessPieces.ChessPiece;
+import GameModel.BoardSquare;
 
 public class ChessBoardSquare extends BoardSquare {
 	public char color;

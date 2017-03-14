@@ -1,4 +1,4 @@
-package chess;
+package ChessModel.ChessPieces;
 
 public class Pawn extends ChessPiece {
 	private static String name = "Pawn";

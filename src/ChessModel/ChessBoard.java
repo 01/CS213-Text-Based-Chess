@@ -1,4 +1,12 @@
-package chess;
+package ChessModel;
+
+import ChessModel.ChessPieces.Bishop;
+import ChessModel.ChessPieces.King;
+import ChessModel.ChessPieces.Knight;
+import ChessModel.ChessPieces.Pawn;
+import ChessModel.ChessPieces.Queen;
+import ChessModel.ChessPieces.Rook;
+import GameModel.GameBoard;
 
 public class ChessBoard extends GameBoard{
 	public static final int numRanks = 8;

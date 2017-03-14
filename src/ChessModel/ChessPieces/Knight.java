@@ -1,4 +1,4 @@
-package chess;
+package ChessModel.ChessPieces;
 
 /**
  * Created by xbbl7mk on 3/3/2017.

@@ -2,6 +2,8 @@ package chess;
 import java.io.IOException;
 import java.util.Arrays;
 
+import ChessModel.ChessBoard;
+
 public class Chess {
 
     public static ChessBoard board;

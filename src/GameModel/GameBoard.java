@@ -1,4 +1,5 @@
-package chess;
+package GameModel;
+
 public abstract class GameBoard {
 	public BoardSquare [][] GameBoard;
 	public int columns;
