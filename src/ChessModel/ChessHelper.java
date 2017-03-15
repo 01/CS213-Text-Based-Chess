@@ -39,5 +39,9 @@ public class ChessHelper {
 			else return 2;												// Moving to the left of Board
 		}
 	}
+	
+	public static boolean isDiagonal(String start, String end) {
+		return (Math.abs((start.charAt(0) - end.charAt(0))/(start.charAt(1)-end.charAt(1))) == 1);
+	}
 
 }

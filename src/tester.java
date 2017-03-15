@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import ChessModel.*;
 
+
 public class tester {
     public static ChessBoard board;
     
@@ -11,9 +12,48 @@ public class tester {
     	board = new ChessBoard();
     	board.printChessBoardEmpty();
     	board.printInitialChessBoard();
+    	//testIsDiagonal();
     	//pieceInPathTest();
     	//testPawnMoves();
     	
+    }
+    public static void testIsDiagonal() {
+    	System.out.println("\n Testing isDiagonal Chess Helper Method\n");
+    	System.out.println("Testing Upper Right Direction");
+    	System.out.print("A1 to C3  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("a1", "c3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.print("C5 to E7  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("c5", "e7")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.println("Testing Upper Left Direction");
+    	System.out.print("C5 to A7  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("c5", "a7")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.print("E5 to B8  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("a1", "c3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.print("Testing Lower Left Direction");
+    	System.out.print("C5 to A3  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("c5", "a3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.print("E5 to c3  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("e5", "c3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.println("Testing Lower Right Direction");
+    	System.out.print("C5 to E3  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("c5", "e3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.print("E5 to g3  Expected: isDiagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("e5", "g3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.println("Testing Not Diagonal Direction");
+    	System.out.print("C5 to C3  Expected: not Diagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("c5", "c3")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
+    	System.out.print("E5 to E1  Expected: not Diagonal   Actual: ");
+    	if(ChessHelper.isDiagonal("e5", "e1")) System.out.print("isDiagonal\n");
+    	else System.out.print("not Diagonal\n");
     }
     
     public static void testPawnMoves() {

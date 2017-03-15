@@ -16,7 +16,8 @@ public class Bishop extends ChessPiece {
     /* Bishop can travel any distance diagonally 
      * Bishop can not jump over pieces
      */
-    public boolean isValidMove(String RankandFile0, String RankandFile1) {
-    	if(!(ChessHelper.isValidCoordinates(RankandFile0) || !(ChessHelper.isValidCoordinates(RankandFile1)))) return false;
+    public boolean isValidMove(String start, String end, boolean isCapturing) {
+    	if(!super.isValidMove(start, end, isCapturing)) return false;
+    	if()
     }
 }
