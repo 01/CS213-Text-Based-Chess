@@ -18,6 +18,7 @@ public class Bishop extends ChessPiece {
      */
     public boolean isValidMove(String start, String end, boolean isCapturing) {
     	if(!super.isValidMove(start, end, isCapturing)) return false;
-    	if()
+    	if(!(ChessHelper.isDiagonal(start, end))) return false;
+    	return true;
     }
 }
