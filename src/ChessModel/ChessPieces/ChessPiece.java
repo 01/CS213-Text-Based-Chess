@@ -15,7 +15,7 @@ public abstract class ChessPiece extends GamePiece {
         return this.color;
     }
 
-    public char getNameI() {
+    public char getName() {
     	return this.name.charAt(0);
     }
     
@@ -24,12 +24,16 @@ public abstract class ChessPiece extends GamePiece {
     	char File0 = end.toLowerCase().charAt(0);
     	
     	if(Rank0 < '1' || Rank0 > '8') return false;
-    	if(File0 < 'a' || File0> 'f') return false;
+    	if(File0 < 'a' || File0 > 'h') return false;
     	return true;	
     }
 
 	public boolean getEnPassable() {
 		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean getPromotable() {
 		return false;
 	}
     

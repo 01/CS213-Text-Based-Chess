@@ -16,6 +16,9 @@ public class Pawn extends ChessPiece {
     	return this.enPassable;
     }
     
+    public boolean getPromotable() {
+    	return this.isPromotable;
+    }
     /* Pawn can move only forward, Pawn can move two spaces only on first turn 
 	 * Pawn can not jump over pieces on initial double move
 	 * Pawn can only attack diagonally.  
@@ -46,22 +49,23 @@ public class Pawn extends ChessPiece {
     		}
     		if(Rank1 == '8') {
     			this.isPromotable = true;
-    			return true;
     		}
     	}
     	else {
+    		//System.out.println("Start "+ RankandFile0 + "makes it here1");
     		if((Rank0-Rank1) < 1) return false;
     	
     		if(Rank0 == '7') {
     			//Its first move
     			if(Rank1 == '5') this.enPassable = true;					// Sets enPassable if the pawn is being moved two spaces
+    			//System.out.println("Start "+ RankandFile0 + "makes it here");
     			return true;
     		}
     		if(Rank1 == '1') {
     			this.isPromotable = true;
     		}
     	}
-		this.enPassable = false;
+		this.enPassable = false;		// If moved for any non enPassable set no longer enPassable
     	return true;
     }
 }

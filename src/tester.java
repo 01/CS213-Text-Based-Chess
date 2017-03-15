@@ -15,25 +15,57 @@ public class tester {
     	//testIsDiagonal();
     	//pieceInPathTest();
     	//testPawnMoves();
+    	//testEnPasse();
+    	testPromotion();
     	
-    	board.makeMove("a2", "a4", 'w');
-    	board.printChessBoard();
-    	board.makeMove("a7", "a5", 'b');
-    	board.printChessBoard();
-    	board.makeMove("b2", "b4", 'w');
-    	board.printChessBoard();
-    	board.makeMove("b4", "b5", 'w');
-    	board.printChessBoard();
-    	board.makeMove("b4", "b5", 'w');
-    	board.printChessBoard();
-    	board.makeMove("b5", "a6", 'w');
-    	board.printChessBoard();
-    	
-    
+    	    
     	testQueenMoves();
     }
     
+    public static void testPromotion() {
+    	board.makeMove("b2 b4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b4 b5", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b5 b6", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b6 c7", 'w');
+    	board.printChessBoard();
+    	board.makeMove("c7 d8 N", 'w');
+    	board.printChessBoard();
+    	
+    	board.makeMove("d7 d5", 'b');
+    	board.makeMove("d5 d4", 'b');
+    	board.makeMove("d4 d3", 'b');
+    	board.makeMove("d3 e2", 'b');
+    	board.makeMove("e2 f1", 'b');
+    	board.printChessBoard();
+    	
+    }
     
+    public static void testEnPasse() {
+    	board.makeMove("a2 a4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("a7 a5", 'b');
+    	board.printChessBoard();
+    	board.makeMove("b2 b4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b4 b5", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b4 b5", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b5 a6", 'w');
+    	board.printChessBoard();
+    	board.makeMove("h2 h4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("g7 g5", 'b');
+    	board.printChessBoard();
+    	board.makeMove("g5 g4", 'b');
+    	board.printChessBoard();
+    	board.makeMove("g4 h3", 'b');
+    	board.printChessBoard();
+
+    }
     
     public static void testQueenMoves() {
     	System.out.println("\n\n-----------------Testing Queen Moves------------------");

@@ -164,7 +164,7 @@ public class ChessBoard extends GameBoard{
 		for(int i = 0; i < rows; i++) {
 			System.out.println("");
 			for(int k =0; k < columns; k++) {
-				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getNameI() + " ");
+				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getName() + " ");
 				else if(this.chessBoard[i][k].color == 'B')System.out.print("## ");
 				else System.out.print("   ");
 			}
@@ -177,13 +177,16 @@ public class ChessBoard extends GameBoard{
 		int [] endPiece = ChessHelper.stringToCoordinate(end);
 		boolean isCapturing = false;
 		
+		System.out.println("\nAttempting move: " + start + " " + end + " " + endPiece[0]);
+		//if(this.chessBoard[endPiece[0]-1][endPiece[1]].piece != null)System.out.println(this.chessBoard[endPiece[0]-1][endPiece[1]].piece.getEnPassable());
+		
 		if(this.chessBoard[startPiece[0]][startPiece[1]].piece == null || this.chessBoard[startPiece[0]][startPiece[1]].piece.getColor() != playersTurnColor) return false;
 		if(this.chessBoard[endPiece[0]][endPiece[1]].piece != null) {
 			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() == playersTurnColor) return false; 
 			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() != playersTurnColor) isCapturing = true;
 		}
-		else {
-			if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getNameI() == 'P' && (endPiece[0] == 2 || endPiece[0] == 6) && ChessHelper.isDiagonal(start, end)) {
+		else { // Enpasse Check
+			if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'P' && (endPiece[0] == 2 || endPiece[0] == 5) && ChessHelper.isDiagonal(start, end)) {
 				if(startPiece[0] > endPiece[0]) {
 					if(this.chessBoard[endPiece[0] + 1][endPiece[1]].piece.getEnPassable()) return true;
 				}
@@ -192,15 +195,21 @@ public class ChessBoard extends GameBoard{
 				}
 			}
 		}
-		if(this.pieceInPath(start, end) && (this.chessBoard[startPiece[0]][startPiece[1]].piece.getNameI() != 'N')) return false;
-		
+		if(this.pieceInPath(start, end) && (this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() != 'N')) return false;
+		//System.out.println("Makes it past pieceInPath Check");
 		if(!(this.chessBoard[startPiece[0]][startPiece[1]].piece.isValidMove(start, end, isCapturing))) return false;
 		
 		return true;
 		
 	}
 	
-	public void makeMove(String start, String end, char playersTurnColor) {
+	public void makeMove(String move, char playersTurnColor) {
+		String [] moveParse = move.split(" ");
+		String special = null;
+		if(moveParse.length == 3) special = moveParse[2];
+		String start = moveParse[0];
+		String end = moveParse[1];
+		
 		if(!this.attemptMove(start, end, playersTurnColor)) {
 			System.out.println("\nInvalid Move " + start + " " + end);
 			return;
@@ -209,15 +218,40 @@ public class ChessBoard extends GameBoard{
 		int [] endPiece = ChessHelper.stringToCoordinate(end);
 		
 		// EnPasse
-		if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getNameI() == 'P' && ChessHelper.isDiagonal(start, end) && this.chessBoard[endPiece[0]][endPiece[1]].piece == null) {
-			if(startPiece[0] > endPiece[0]) {
-				this.chessBoard[endPiece[0] + 1][endPiece[1]].piece = null;
-			}
-			else {
-				this.chessBoard[endPiece[0] -1][endPiece[1]].piece = null;
+		if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'P') {
+			if(ChessHelper.isDiagonal(start, end) && this.chessBoard[endPiece[0]][endPiece[1]].piece == null) {
+				if(startPiece[0] > endPiece[0]) {
+					this.chessBoard[endPiece[0] + 1][endPiece[1]].piece = null;
+				}
+				else {
+					this.chessBoard[endPiece[0] -1][endPiece[1]].piece = null;
+				}
 			}
 		}
+		
 		this.chessBoard[endPiece[0]][endPiece[1]].piece = this.chessBoard[startPiece[0]][startPiece[1]].piece;
 		this.chessBoard[startPiece[0]][startPiece[1]].piece = null;
+		if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getName() == 'P' && this.chessBoard[endPiece[0]][endPiece[1]].piece.getPromotable()) {
+			this.chessBoard[endPiece[0]][endPiece[1]].piece = getPromotion(special, playersTurnColor);
+		}
+	}
+	
+		
+	public ChessPiece getPromotion(String special, char playersTurnColor) {
+		if(special == null) special = "Q";
+		switch(special.toLowerCase().charAt(0)) {
+			case 'r' :
+				return new Rook(playersTurnColor);
+			case 'n' : 
+				return new Knight(playersTurnColor);
+			case 'b' :
+				return new Bishop(playersTurnColor);
+			case 'q' : 
+				return new Queen(playersTurnColor);
+			case 'p' :
+				return new Pawn(playersTurnColor);
+			default :
+				return new Queen(playersTurnColor);
+		}
 	}
 }
