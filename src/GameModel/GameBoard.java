@@ -22,5 +22,6 @@ public abstract class GameBoard {
 	
 	  public boolean isPieceInPath(int [] start, int [] end) {
 		  return false;
-	    }
+	  }
+	  
 }

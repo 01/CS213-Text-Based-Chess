@@ -15,5 +15,29 @@ public class ChessHelper {
     	if(coordinates[1] > 7 || coordinates[1] < 0) return false;
     	return true;
 	}
+	
+	public static int moveDirection (String start, String end) {
+		// 1 = Horiztonal, 2 = Vertical, 3 = Diagonal 
+		int [] startCoords = ChessHelper.stringToCoordinate(start);
+		int [] endCoords = ChessHelper.stringToCoordinate(end);
+		
+		if(startCoords[0] == endCoords[0]) return 1;
+		else if(startCoords[1] == endCoords[1]) return 2;
+		else return 3;
+	}
+	
+	public static int verticalMoveDirection(String start, String end) {
+		// 1 = UR, 2 = UL, 3 = LR, 4= LL
+		int [] startCoords = ChessHelper.stringToCoordinate(start);
+		int [] endCoords = ChessHelper.stringToCoordinate(end);
+		if(startCoords[0] < endCoords[0]) { 						  	// Moving up board
+			if(startCoords[1] < endCoords[1]) return 1;				 	// Moving to the right of Board
+			else return 2;												// Moving to the left of Board
+		}
+		else {															// Moving down board
+			if(startCoords[1] < endCoords[1]) return 3;  				// Moving to the right of Board
+			else return 4;												// Moving to the left of Board
+		}
+	}
 
 }
