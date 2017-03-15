@@ -1,12 +1,11 @@
 package GameModel;
 
-public class BoardSquare{
-	public GamePiece piece;
+public abstract class  BoardSquare{
 	public int row, column;
 	
-	public BoardSquare(int row, int column, GamePiece piece) {
+	public BoardSquare(int row, int column) {
 		this.row = row;
 		this.column = column;
-		this.piece = piece;
 	}
+	
 }

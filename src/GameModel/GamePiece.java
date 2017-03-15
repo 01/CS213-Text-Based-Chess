@@ -17,8 +17,6 @@ public abstract class GamePiece {
 		return this.name.charAt(0);
 	}
 	
-	public boolean isValidMove(){
-		return true;
-	}
+	
 
 }

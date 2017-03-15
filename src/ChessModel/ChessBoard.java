@@ -14,23 +14,23 @@ public class ChessBoard extends GameBoard{
 	
 	public ChessBoard() {
 		super(numRanks, numFiles);
-		this.chessBoard = (ChessBoardSquare[][]) this.GameBoard;
+		this.chessBoard = new ChessBoardSquare[numRanks][numFiles];
+		initializeEmptyBoard();
 		initializeChessBoard();
 	}
 	
 	public void initializeEmptyBoard()  {
-		this.GameBoard = new ChessBoardSquare[numRanks][numFiles];
 		int colorTrack = 1;
 		for(int i = 0; i < rows; i++) {
 			colorTrack--;
 			for(int k =0; k < columns; k++) {
 				if(colorTrack%2==0) {
-					GameBoard[i][k] = new ChessBoardSquare(i, k, null, 'W');
+					this.chessBoard[i][k] = new ChessBoardSquare(i, k, null, 'W');
 					colorTrack++;
 					//System.out.println(((ChessBoardSquare)GameBoard[i][k]).file);
 				}
 				else {
-					GameBoard[i][k] = new ChessBoardSquare(i, k, null, 'B');
+					this.chessBoard[i][k] = new ChessBoardSquare(i, k, null, 'B');
 					//System.out.println(((ChessBoardSquare)GameBoard[i][k]).file);
 					colorTrack++;
 					
@@ -42,14 +42,14 @@ public class ChessBoard extends GameBoard{
 	public void initializeChessBoard() {
 		// Initialize Pawns
 		for(int i = 0; i < numRanks; i++ ) {
-			this.chessBoard[1][i].piece = new Pawn(BLACK);
-			this.chessBoard[numFiles-2][i].piece = new Pawn(WHITE);
+			this.chessBoard[1][i].piece = (Pawn)(new Pawn(BLACK));
+			this.chessBoard[numFiles-2][i].piece = (Pawn)(new Pawn(WHITE));
 		}
 		
 		// Initiaze Rooks
-		this.chessBoard[0][0].piece = new Rook(BLACK);
-		this.chessBoard[0][7].piece = new Rook(BLACK);
-		this.chessBoard[7][0].piece = new Rook(WHITE);
+		this.chessBoard[0][0].piece = (Rook) (new Rook(BLACK));
+		this.chessBoard[0][7].piece = (Rook) (new Rook(BLACK));
+		this.chessBoard[7][0].piece = (Rook) (new Rook(WHITE));
 		this.chessBoard[7][7].piece = new Rook(WHITE);
 		
 		//Initialize Knights

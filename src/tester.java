@@ -1,7 +1,7 @@
 import java.io.IOException;
 
-import ChessModel.ChessBoard;
-import ChessModel.ChessHelper;
+
+import ChessModel.*;
 
 public class tester {
     public static ChessBoard board;
@@ -11,7 +11,56 @@ public class tester {
     	board = new ChessBoard();
     	board.printChessBoardEmpty();
     	board.printInitialChessBoard();
-    	pieceInPathTest();
+    	//pieceInPathTest();
+    	//testPawnMoves();
+    	
+    }
+    
+    public static void testPawnMoves() {
+    	System.out.println("\n\n---------------------Test Pawn Moves-------------------\n");
+    	System.out.println("Moving White Pawns 1 and 2 spaces or more Forward start");
+    	System.out.print("Moving Pawn from A2 to A4  Expect: Valid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("a2","a4", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from A2 to A3  Expect: Valid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("a2","a3", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from C2 to C3  Expect: Valid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("c2","c3", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from C2 to C5  Expect: InValid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("c2","c5", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.println("Moving White Pawns 1 and 2 spaces or more Backwards from start");
+    	System.out.print("Moving Pawn from C2 to C1  Expect: InValid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("c2","c1", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from D2 to D1  Expect: InValid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("d2","c1", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	
+    	System.out.println("Moving Black Pawns 1 and 2 spaces or more Forward start");
+    	System.out.print("Moving Pawn from A7 to A5  Expect: Valid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("a7","a5", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from A7 to A6  Expect: Valid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("a7","a6", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from C7 to C6  Expect: Valid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("c7","c6", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from C7 to C4  Expect: InValid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("c7","c4", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.println("Moving Black Pawns 1 and 2 spaces or more Backwards from start");
+    	System.out.print("Moving Pawn from C7 to C8  Expect: InValid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("c7","c8", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	System.out.print("Moving Pawn from D7 to D8  Expect: InValid Move  Actual: ");
+    	if(board.chessBoard[6][0].piece.isValidMove("d7","d8", false)) System.out.print("Valid Move\n");
+    	else System.out.print("Invalid Move\n");
+    	
+    	
     }
     
     public static void pieceInPathTest() {

@@ -19,12 +19,12 @@ public abstract class ChessPiece extends GamePiece {
     	return this.name.charAt(0);
     }
     
-    public boolean isValidMove(String RankandFile) {
-    	char Rank = RankandFile.toLowerCase().charAt(0);
-    	char File = RankandFile.toLowerCase().charAt(1);
+    public boolean isValidMove(String start, String end, boolean isCapture) {
+    	char Rank0 = start.toLowerCase().charAt(1);
+    	char File0 = end.toLowerCase().charAt(0);
     	
-    	if(Rank < '1' || Rank > '8') return false;
-    	if(File < 'a' || File > 'f') return false;
+    	if(Rank0 < '1' || Rank0 > '8') return false;
+    	if(File0 < 'a' || File0> 'f') return false;
     	return true;	
     }
     

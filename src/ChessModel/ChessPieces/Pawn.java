@@ -26,15 +26,15 @@ public class Pawn extends ChessPiece {
     	char File0 = RankandFile0.charAt(0);
     	char File1 =  RankandFile1.charAt(0);
     	
-    	if(!super.isValidMove()) return false;
+    	if(!super.isValidMove(RankandFile0, RankandFile1, isCapturing)) return false;
     	
     	// Pawn can only move forward so File should be same for start and finish unless attacking, but should always be forward
     	if(Math.abs((File0 - File1)) > 1) return false;
     	if(Math.abs(File0-File1) > 0 && !isCapturing) return false;			// Can only move diagonal if capturing
     	if((File0 == File1) && isCapturing) return false;					// Pawn can not capture on vertical move
     	// Check to see what player
-    	if(this.color == 'B') {
-    		if((Rank0-Rank1) < 1) return false;
+    	if(this.color == 'W') {
+    		if((Rank0-Rank1) > 1) return false;
 
     		if(Rank0 == '2') {
     			if(Rank1 == '4')this.enPassable = true;
@@ -42,10 +42,11 @@ public class Pawn extends ChessPiece {
     		}
     		if(Rank1 == '8') {
     			this.isPromotable = true;
+    			return true;
     		}
     	}
     	else {
-    		if((Rank0-Rank1) > 1) return false;
+    		if((Rank0-Rank1) < 1) return false;
     	
     		if(Rank0 == '7') {
     			//Its first move
