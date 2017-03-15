@@ -43,7 +43,7 @@ public class ChessBoard extends GameBoard{
 		// Initialize Pawns
 		for(int i = 0; i < numRanks; i++ ) {
 			this.chessBoard[1][i].piece = (Pawn)(new Pawn(BLACK));
-			this.chessBoard[numFiles-2][i].piece = (Pawn)(new Pawn(WHITE));
+			this.chessBoard[6][i].piece = (Pawn)(new Pawn(WHITE));
 		}
 		
 		// Initiaze Rooks
@@ -158,7 +158,7 @@ public class ChessBoard extends GameBoard{
 		}
 	}
 	
-	public void printInitialChessBoard() {
+	public void printChessBoard() {
 		System.out.println("\n-----------------------------");
 		System.out.println("Initial Positions");
 		for(int i = 0; i < rows; i++) {
@@ -172,4 +172,52 @@ public class ChessBoard extends GameBoard{
 		
 	}
 	
+	public boolean attemptMove(String start, String end, char playersTurnColor) {
+		int [] startPiece = ChessHelper.stringToCoordinate(start);
+		int [] endPiece = ChessHelper.stringToCoordinate(end);
+		boolean isCapturing = false;
+		
+		if(this.chessBoard[startPiece[0]][startPiece[1]].piece == null || this.chessBoard[startPiece[0]][startPiece[1]].piece.getColor() != playersTurnColor) return false;
+		if(this.chessBoard[endPiece[0]][endPiece[1]].piece != null) {
+			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() == playersTurnColor) return false; 
+			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() != playersTurnColor) isCapturing = true;
+		}
+		else {
+			if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getNameI() == 'P' && (endPiece[0] == 2 || endPiece[0] == 6) && ChessHelper.isDiagonal(start, end)) {
+				if(startPiece[0] > endPiece[0]) {
+					if(this.chessBoard[endPiece[0] + 1][endPiece[1]].piece.getEnPassable()) return true;
+				}
+				else {
+					if(this.chessBoard[endPiece[0] -1][endPiece[1]].piece.getEnPassable()) return true;
+				}
+			}
+		}
+		if(this.pieceInPath(start, end) && (this.chessBoard[startPiece[0]][startPiece[1]].piece.getNameI() != 'N')) return false;
+		
+		if(!(this.chessBoard[startPiece[0]][startPiece[1]].piece.isValidMove(start, end, isCapturing))) return false;
+		
+		return true;
+		
+	}
+	
+	public void makeMove(String start, String end, char playersTurnColor) {
+		if(!this.attemptMove(start, end, playersTurnColor)) {
+			System.out.println("\nInvalid Move " + start + " " + end);
+			return;
+		}
+		int [] startPiece = ChessHelper.stringToCoordinate(start);
+		int [] endPiece = ChessHelper.stringToCoordinate(end);
+		
+		// EnPasse
+		if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getNameI() == 'P' && ChessHelper.isDiagonal(start, end) && this.chessBoard[endPiece[0]][endPiece[1]].piece == null) {
+			if(startPiece[0] > endPiece[0]) {
+				this.chessBoard[endPiece[0] + 1][endPiece[1]].piece = null;
+			}
+			else {
+				this.chessBoard[endPiece[0] -1][endPiece[1]].piece = null;
+			}
+		}
+		this.chessBoard[endPiece[0]][endPiece[1]].piece = this.chessBoard[startPiece[0]][startPiece[1]].piece;
+		this.chessBoard[startPiece[0]][startPiece[1]].piece = null;
+	}
 }

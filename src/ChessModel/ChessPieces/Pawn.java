@@ -12,6 +12,10 @@ public class Pawn extends ChessPiece {
         this.isPromotable = false;
     }
     
+    public boolean getEnPassable(){
+    	return this.enPassable;
+    }
+    
     /* Pawn can move only forward, Pawn can move two spaces only on first turn 
 	 * Pawn can not jump over pieces on initial double move
 	 * Pawn can only attack diagonally.  
@@ -33,7 +37,7 @@ public class Pawn extends ChessPiece {
     	if(Math.abs(File0-File1) > 0 && !isCapturing) return false;			// Can only move diagonal if capturing
     	if((File0 == File1) && isCapturing) return false;					// Pawn can not capture on vertical move
     	// Check to see what player
-    	if(this.color == 'W') {
+    	if(this.color == 'w') {
     		if((Rank0-Rank1) > 1) return false;
 
     		if(Rank0 == '2') {
@@ -51,7 +55,7 @@ public class Pawn extends ChessPiece {
     		if(Rank0 == '7') {
     			//Its first move
     			if(Rank1 == '5') this.enPassable = true;					// Sets enPassable if the pawn is being moved two spaces
-    			else return true;
+    			return true;
     		}
     		if(Rank1 == '1') {
     			this.isPromotable = true;

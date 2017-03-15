@@ -17,13 +17,14 @@ public class ChessHelper {
 	}
 	
 	public static int moveDirection (String start, String end) {
-		// 1 = Horiztonal, 2 = Vertical, 3 = Diagonal 
+		// 1 = Horiztonal, 2 = Vertical, 3 = Diagonal, 4 = Not normal
 		int [] startCoords = ChessHelper.stringToCoordinate(start);
 		int [] endCoords = ChessHelper.stringToCoordinate(end);
 		
 		if(startCoords[0] == endCoords[0]) return 1;
 		else if(startCoords[1] == endCoords[1]) return 2;
-		else return 3;
+		else if (isDiagonal(start, end)) return 3;
+		else return 4;
 	}
 	
 	public static int verticalMoveDirection(String start, String end) {
@@ -42,6 +43,15 @@ public class ChessHelper {
 	
 	public static boolean isDiagonal(String start, String end) {
 		return (Math.abs((start.charAt(0) - end.charAt(0))/(start.charAt(1)-end.charAt(1))) == 1);
+	}
+	
+	public static boolean isAdjacent(String start, String end) {
+		char startRank = start.charAt(1);
+		char endRank = end.charAt(1);
+		char startFile = start.charAt(0);
+		char endFile = end.charAt(0);
+		
+		return ((Math.abs(startRank-endRank)+ Math.abs(startFile-endFile)) == 1)
 	}
 
 }

@@ -27,6 +27,11 @@ public abstract class ChessPiece extends GamePiece {
     	if(File0 < 'a' || File0> 'f') return false;
     	return true;	
     }
+
+	public boolean getEnPassable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
   
 }

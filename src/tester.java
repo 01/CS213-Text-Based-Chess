@@ -11,10 +11,34 @@ public class tester {
     	
     	board = new ChessBoard();
     	board.printChessBoardEmpty();
-    	board.printInitialChessBoard();
+    	board.printChessBoard();
     	//testIsDiagonal();
     	//pieceInPathTest();
     	//testPawnMoves();
+    	
+    	board.makeMove("a2", "a4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("a7", "a5", 'b');
+    	board.printChessBoard();
+    	board.makeMove("b2", "b4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b4", "b5", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b4", "b5", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b5", "a6", 'w');
+    	board.printChessBoard();
+    	
+    
+    	testQueenMoves();
+    }
+    
+    
+    
+    public static void testQueenMoves() {
+    	System.out.println("\n\n-----------------Testing Queen Moves------------------");
+    	if(board.attemptMove("D1", "D4", 'w')) System.out.println("\n\nMove valid from A1 to A3");
+    	else System.out.print("Illegal Move");
     	
     }
     public static void testIsDiagonal() {
