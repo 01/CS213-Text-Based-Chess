@@ -4,11 +4,12 @@ import ChessModel.ChessHelper;
 
 public class Pawn extends ChessPiece {
 	private static final String name = "Pawn";
-	private boolean enPassable;
+	private boolean enPassable, isPromotable;
 
     public Pawn(char color) {
         super(name, color);
         this.enPassable = false;
+        this.isPromotable = false;
     }
     
     /* Pawn can move only forward, Pawn can move two spaces only on first turn 
@@ -25,12 +26,12 @@ public class Pawn extends ChessPiece {
     	char File0 = RankandFile0.charAt(0);
     	char File1 =  RankandFile1.charAt(0);
     	
-    	if(!(ChessHelper.isValidCoordinates(RankandFile0) || !(ChessHelper.isValidCoordinates(RankandFile1)))) return false;
+    	if(!super.isValidMove()) return false;
     	
     	// Pawn can only move forward so File should be same for start and finish unless attacking, but should always be forward
     	if(Math.abs((File0 - File1)) > 1) return false;
     	if(Math.abs(File0-File1) > 0 && !isCapturing) return false;			// Can only move diagonal if capturing
-   
+    	if((File0 == File1) && isCapturing) return false;					// Pawn can not capture on vertical move
     	// Check to see what player
     	if(this.color == 'B') {
     		if((Rank0-Rank1) < 1) return false;
@@ -40,7 +41,7 @@ public class Pawn extends ChessPiece {
     			return true;
     		}
     		if(Rank1 == '8') {
-    			// Promotable
+    			this.isPromotable = true;
     		}
     	}
     	else {
@@ -48,14 +49,14 @@ public class Pawn extends ChessPiece {
     	
     		if(Rank0 == '7') {
     			//Its first move
-    			if(Rank1 == '5') this.enPassable = true;
-    			return true;
+    			if(Rank1 == '5') this.enPassable = true;					// Sets enPassable if the pawn is being moved two spaces
+    			else return true;
     		}
     		if(Rank1 == '1') {
-    			// Promotable
+    			this.isPromotable = true;
     		}
     	}
-		
+		this.enPassable = false;
     	return true;
     }
 }

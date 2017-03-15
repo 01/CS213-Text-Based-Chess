@@ -30,13 +30,13 @@ public class ChessHelper {
 		// 1 = UR, 2 = UL, 3 = LR, 4= LL
 		int [] startCoords = ChessHelper.stringToCoordinate(start);
 		int [] endCoords = ChessHelper.stringToCoordinate(end);
-		if(startCoords[0] < endCoords[0]) { 						  	// Moving up board
-			if(startCoords[1] < endCoords[1]) return 1;				 	// Moving to the right of Board
-			else return 2;												// Moving to the left of Board
-		}
-		else {															// Moving down board
-			if(startCoords[1] < endCoords[1]) return 3;  				// Moving to the right of Board
+		if(startCoords[0] < endCoords[0]) { 						  	// Moving down board
+			if(startCoords[1] < endCoords[1]) return 3;				 	// Moving to the right of Board
 			else return 4;												// Moving to the left of Board
+		}
+		else {															// Moving up board
+			if(startCoords[1] < endCoords[1]) return 1;  				// Moving to the right of Board
+			else return 2;												// Moving to the left of Board
 		}
 	}
 

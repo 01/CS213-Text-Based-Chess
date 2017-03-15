@@ -20,8 +20,8 @@ public abstract class ChessPiece extends GamePiece {
     }
     
     public boolean isValidMove(String RankandFile) {
-    	char Rank = RankandFile.charAt(0);
-    	char File = RankandFile.charAt(1);
+    	char Rank = RankandFile.toLowerCase().charAt(0);
+    	char File = RankandFile.toLowerCase().charAt(1);
     	
     	if(Rank < '1' || Rank > '8') return false;
     	if(File < 'a' || File > 'f') return false;
