@@ -4,11 +4,18 @@ import ChessModel.ChessHelper;
 
 public class King extends ChessPiece {
 	public static String name = "King";
-    int castled;
-    char color;
+    private boolean firstMove = true;
 
     public King(char color) {
         super(name, color);
+    }
+    
+    public boolean isFirstMove() {
+    	return this.firstMove;
+    }
+    
+    public void setFirstMove() {
+    	this.firstMove = false;
     }
     
     public boolean isValidMove(String start, String end, boolean isCapturing) {
@@ -16,12 +23,5 @@ public class King extends ChessPiece {
     	if(!ChessHelper.isAdjacent(start, end)) return false;
     	return true;
     }
-    public int getCastled() {
-        return castled;
-    }
-
-    public void setCastled(int castled) {
-        this.castled = castled;
-    }
-
+ 
 }

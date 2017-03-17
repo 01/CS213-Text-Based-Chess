@@ -2,29 +2,36 @@ package ChessModel;
 
 public class ChessHelper {
 	
-	public static int[] stringToCoordinate(String RankandFile) {
+	public static int[] stringToCoordinate(String position) {
 		int[] coordinates = new int[2];
-		coordinates[0] = '8'-RankandFile.toLowerCase().charAt(1);
-		coordinates[1] =  RankandFile.toLowerCase().charAt(0) - 'a';
+		coordinates[0] = '8'-position.toLowerCase().charAt(1);
+		coordinates[1] =  position.toLowerCase().charAt(0) - 'a';
 		return coordinates;
 	}
 	
-	public static boolean isValidCoordinates(String RankandFile) {
-		int [] coordinates = ChessHelper.stringToCoordinate(RankandFile);
+	public static boolean isValidCoordinates(String move) {
+		int [] coordinates = ChessHelper.stringToCoordinate(move);
     	if(coordinates[0] > 7 || coordinates[0] < 0) return false;
     	if(coordinates[1] > 7 || coordinates[1] < 0) return false;
     	return true;
 	}
 	
-	public static int moveDirection (String start, String end) {
-		// 1 = Horiztonal, 2 = Vertical, 3 = Diagonal, 4 = Not normal
+	public static int moveDirection (String move) {
+		String [] moveParse = move.split(" ");
+		String start = moveParse[0];
+		String end = moveParse[1];
+		// 1 = HoriztonalLeft, 2 = HorizontalRight, 3 = VerticalUp, 4 = VerticalDown, 5 = Diagonal , 6= Not normal
 		int [] startCoords = ChessHelper.stringToCoordinate(start);
 		int [] endCoords = ChessHelper.stringToCoordinate(end);
 		
-		if(startCoords[0] == endCoords[0]) return 1;
-		else if(startCoords[1] == endCoords[1]) return 2;
-		else if (isDiagonal(start, end)) return 3;
-		else return 4;
+		if(startCoords[0] == endCoords[0]) {
+			return (startCoords[1] > endCoords[1]) ? 1: 2;
+		}
+		else if(startCoords[1] == endCoords[1]) {
+			return (startCoords[0] > endCoords[0]) ? 3: 5;
+		}
+		else if (isDiagonal(start, end)) return 5;
+		else return 6;
 	}
 	
 	public static int verticalMoveDirection(String start, String end) {
@@ -51,7 +58,7 @@ public class ChessHelper {
 		char startFile = start.charAt(0);
 		char endFile = end.charAt(0);
 		
-		return ((Math.abs(startRank-endRank)+ Math.abs(startFile-endFile)) == 1)
+		return ((Math.abs(startRank-endRank)+ Math.abs(startFile-endFile)) == 1);
 	}
 
 }

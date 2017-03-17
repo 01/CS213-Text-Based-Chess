@@ -5,6 +5,7 @@ package ChessModel.ChessPieces;
  */
 public class Knight extends ChessPiece {
 	private static String name = "Knight";
+	private static boolean isFirstMove = true;
 
     public Knight(char color) {
         super(name, color);

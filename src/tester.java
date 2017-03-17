@@ -16,10 +16,21 @@ public class tester {
     	//pieceInPathTest();
     	//testPawnMoves();
     	//testEnPasse();
-    	testPromotion();
+    	//testPromotion();
+    	testCastling();
+    	//testQueenMoves();
+    }
+    
+    public static void testCastling() {
+    	board.makeMove("f2 f4", 'w');
+    	board.makeMove("e2 e4", 'w');
+    	board.makeMove("f1 c4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("g1 h3", 'w');
+    	board.printChessBoard();
+    	board.makeMove("e1 g1", 'w');
+    	board.printChessBoard();
     	
-    	    
-    	testQueenMoves();
     }
     
     public static void testPromotion() {

@@ -6,9 +6,18 @@ package ChessModel.ChessPieces;
 public class Rook extends ChessPiece {
 
 	private static String name = "Rook";
+	private boolean firstMove = true;
 
     public Rook(char color) {
         super(name, color);
+    }
+    
+    public boolean isFirstMove() {
+    	return this.firstMove;
+    }
+    
+    public void setFirstMove() {
+    	this.firstMove = false;
     }
     
     // Assumes check is already made for pieces in path

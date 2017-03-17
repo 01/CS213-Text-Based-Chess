@@ -36,6 +36,11 @@ public abstract class ChessPiece extends GamePiece {
 	public boolean getPromotable() {
 		return false;
 	}
+
+	public boolean isFirstMove() {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
   
 }
