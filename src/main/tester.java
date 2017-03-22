@@ -1,7 +1,11 @@
+package main;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Scanner;
 
 import ChessModel.*;
+import controller.ChessController;
 
 
 public class tester {
@@ -9,18 +13,29 @@ public class tester {
     
     public static void main( String[] args ) throws IOException {
     	
-    	board = new ChessBoard();
-    	board.printChessBoardEmpty();
-    	board.printChessBoard();
-    	//testIsDiagonal();
-    	//pieceInPathTest();
-    	//testPawnMoves();
-    	//testEnPasse();
-    	testPromotion();
-    //	testCastling();
-    	//testQueenMoves();
+    	ChessController game = new ChessController();
+    	boolean previousPlayer = false;
+    	Scanner input = new Scanner(System.in);
+    	String testFile = input.nextLine();
+  
+    	try (BufferedReader br = new BufferedReader(new FileReader(testFile))) {
+				while (!game.gameOver) {
+			
+				if(previousPlayer != game.isWhiteTurn()) {
+					game.printBoard();
+					previousPlayer = game.isWhiteTurn();	
+				}
+				game.printPrompt();
+				String command = br.readLine();
+				if(command==null) {
+					command = input.nextLine();
+				}
+				game.giveCommand(command);
+				
+			}
+    	}
     }
-    
+   
     public static void testCastling() {
     	// Test Castling to File H Rook
     	// White 
