@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2004afc1-817f-4cda-a1f4-6e7ebb4aca4f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessBoard.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessBoard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessBoardSquare.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessBoardSquare.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessHelper.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Bishop.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Bishop.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/ChessPiece.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/ChessPiece.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/King.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/King.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Knight.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Knight.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Pawn.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Pawn.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Queen.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Queen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Rook.class" afterPath="$PROJECT_DIR$/out/production/Chess66/ChessModel/ChessPieces/Rook.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/GameModel/BoardSquare.class" afterPath="$PROJECT_DIR$/out/production/Chess66/GameModel/BoardSquare.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/GameModel/GameBoard.class" afterPath="$PROJECT_DIR$/out/production/Chess66/GameModel/GameBoard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/GameModel/GamePiece.class" afterPath="$PROJECT_DIR$/out/production/Chess66/GameModel/GamePiece.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/controller/ChessController.class" afterPath="$PROJECT_DIR$/out/production/Chess66/controller/ChessController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/main/Chess.class" afterPath="$PROJECT_DIR$/out/production/Chess66/main/Chess.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chess66/main/tester.class" afterPath="$PROJECT_DIR$/out/production/Chess66/main/tester.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChessModel/ChessBoard.java" afterPath="$PROJECT_DIR$/src/ChessModel/ChessBoard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ChessModel/ChessPieces/Queen.java" afterPath="$PROJECT_DIR$/src/ChessModel/ChessPieces/Queen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Chess.java" afterPath="$PROJECT_DIR$/src/main/Chess.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +25,8 @@
       <file leaf-file-name="ChessBoard.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ChessModel/ChessBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="273" column="23" lean-forward="false" selection-start-line="273" selection-start-column="23" selection-end-line="273" selection-end-column="23" />
+            <state relative-caret-position="-830">
+              <caret line="326" column="0" lean-forward="false" selection-start-line="326" selection-start-column="0" selection-end-line="326" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -50,8 +35,8 @@
       <file leaf-file-name="Chess.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Chess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="21" column="49" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="49" />
+            <state relative-caret-position="442">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -60,7 +45,7 @@
       <file leaf-file-name="tester.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/tester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
+            <state relative-caret-position="204">
               <caret line="18" column="43" lean-forward="false" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
               <folding />
             </state>
@@ -88,8 +73,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/chess/Chess.java" />
-        <option value="$PROJECT_DIR$/src/ChessModel/ChessBoard.java" />
         <option value="$PROJECT_DIR$/src/ChessModel/ChessPieces/Queen.java" />
+        <option value="$PROJECT_DIR$/src/main/Chess.java" />
+        <option value="$PROJECT_DIR$/src/ChessModel/ChessBoard.java" />
       </list>
     </option>
   </component>
@@ -700,12 +686,12 @@
       <option name="presentableId" value="Default" />
       <updated>1488488465964</updated>
       <workItem from="1488488469134" duration="787000" />
-      <workItem from="1490209352198" duration="550000" />
+      <workItem from="1490209352198" duration="5552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1337000" />
+    <option name="totallyTimeSpent" value="6339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -718,12 +704,12 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28661418" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.711811" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" x="72" y="137" width="548" height="452" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15739386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -749,7 +735,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -766,22 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Chess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="21" column="49" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/tester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="18" column="43" lean-forward="false" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ChessModel/ChessPieces/Queen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -790,10 +762,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/tester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="43" lean-forward="false" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Chess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ChessModel/ChessBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="273" column="23" lean-forward="false" selection-start-line="273" selection-start-column="23" selection-end-line="273" selection-end-column="23" />
+        <state relative-caret-position="-830">
+          <caret line="326" column="0" lean-forward="false" selection-start-line="326" selection-start-column="0" selection-end-line="326" selection-end-column="0" />
           <folding />
         </state>
       </provider>

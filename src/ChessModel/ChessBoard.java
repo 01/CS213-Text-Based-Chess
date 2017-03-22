@@ -267,70 +267,60 @@ public class ChessBoard extends GameBoard{
 			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() == 'b')this.blackKingSquare = this.chessBoard[endPiece[0]][endPiece[1]];
 			else this.whiteKingSquare = this.chessBoard[endPiece[0]][endPiece[1]];
 		}
+
+        System.out.println("/////////////////////////////");
+        System.out.println(ifCheck(playersTurnColor));
+        System.out.println("/////////////////////////////");
+
 		return true;
 	}
 
-
 	public boolean ifCheck(char playersTurnColor){
-		char oppositeTurnColor = ' ';
-		if (playersTurnColor =='w') oppositeTurnColor = 'b';
-		else if (playersTurnColor == 'b') oppositeTurnColor = 'w';
 
-		ChessBoardSquare OppositeKingSquare=this.chessBoard[0][0];
-
-		for(int i = 0; i < rows; i++) {
-			for(int k =0; k < columns; k++) {
-				if(this.chessBoard[i][k].piece!=null && this.chessBoard[i][k].piece.getName() == 'K' && this.chessBoard[i][k].piece.getColor() == oppositeTurnColor){
-					OppositeKingSquare = this.chessBoard[i][k];
-					System.out.println("HERE IS OPPOSITE KING at "+i+" "+k);
-					break;
-				}
-			}
-		}
-
-		//vertical forward
-		for (int k = OppositeKingSquare.column;k<columns;k++){
-			if(this.chessBoard[OppositeKingSquare.row][k].piece!=null) {
-				if (this.chessBoard[OppositeKingSquare.row][k].piece.getColor() == playersTurnColor)
-					if (this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'Q' || this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'R')
-						return true;
-			}
-			else break;
-
-		}
-
-		//vertical backward
-		for (int k = OppositeKingSquare.column;0<k;k--){
-			if(this.chessBoard[OppositeKingSquare.row][k].piece!=null) {
-				if (this.chessBoard[OppositeKingSquare.row][k].piece.getColor() == playersTurnColor)
-					if (this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'Q' || this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'R')
-						return true;
-			}
-			else break;
-		}
+        ChessBoardSquare OppositeKingSquare=this.chessBoard[0][0];
+		if (playersTurnColor =='w') OppositeKingSquare = blackKingSquare;
+		else if (playersTurnColor == 'b') OppositeKingSquare=whiteKingSquare;
 
 		//horizontal right
+		for (int k = OppositeKingSquare.column;k<columns;k++){
+			if(this.chessBoard[OppositeKingSquare.row][k].piece!=null) {
+               // System.out.println(this.chessBoard[OppositeKingSquare.row][k].piece.getColor()+" "+this.chessBoard[OppositeKingSquare.row][k].piece.getName());
+                if (this.chessBoard[OppositeKingSquare.row][k].piece.getColor() == playersTurnColor)
+					if (this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'Q' || this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'R')
+						return true;
+			}
+		}
+
+		//horizontal left
+		for (int k = OppositeKingSquare.column;0<k;k--){
+			if(this.chessBoard[OppositeKingSquare.row][k].piece!=null) {
+                //System.out.println(this.chessBoard[OppositeKingSquare.row][k].piece.getColor()+" "+this.chessBoard[OppositeKingSquare.row][k].piece.getName());
+				if (this.chessBoard[OppositeKingSquare.row][k].piece.getColor() == playersTurnColor)
+					if (this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'Q' || this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'R')
+						return true;
+			}
+		}
+
+		//vertical right
 		for (int i = OppositeKingSquare.row;i<rows;i++){
 			if(this.chessBoard[i][OppositeKingSquare.column].piece!=null){
 				if (this.chessBoard[i][OppositeKingSquare.column].piece.getColor() == playersTurnColor)
 					if (this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'Q' || this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'R' )
 						return true;
 			}
-			else break;
 		}
 
-		//horizontal left
+		//vertical left
 		for (int i = OppositeKingSquare.row;0<i;i--){
 			if(this.chessBoard[i][OppositeKingSquare.column].piece!=null){
 				if (this.chessBoard[i][OppositeKingSquare.column].piece.getColor() == playersTurnColor)
 					if (this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'Q' || this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'R' )
 						return true;
 			}
-			else break;
 		}
 
 
-		//Check black King attacked by White Pawn
+		//White Pawn attack Black King
 		if(OppositeKingSquare.piece.getColor() == 'b') {
 			int row = OppositeKingSquare.row;
 			int col = OppositeKingSquare.column;
@@ -353,7 +343,7 @@ public class ChessBoard extends GameBoard{
 			}
 		}
 
-		//Check white King attacked by black Pawn
+		//Black Pawn attack Black King
 		if(OppositeKingSquare.piece.getColor() == 'w'){
 			int row = OppositeKingSquare.row;
 			int col = OppositeKingSquare.column;

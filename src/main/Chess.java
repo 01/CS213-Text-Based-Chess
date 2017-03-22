@@ -24,10 +24,10 @@ public class Chess {
 			game.printPrompt();
 			String command = input.nextLine();
 			game.giveCommand(command);
-			
-		}
-   
-        
-    }
+
+	}
+
+
+}
 
 }
