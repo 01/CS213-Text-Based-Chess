@@ -13,6 +13,8 @@ public class ChessBoard extends GameBoard{
 	public static final char WHITE = 'w';
 	public static final char BLACK = 'b';
 	
+	ChessBoardSquare whiteKingSquare, blackKingSquare;
+	
 	public ChessBoardSquare[][] chessBoard;
 	
 	public ChessBoard() {
@@ -70,6 +72,8 @@ public class ChessBoard extends GameBoard{
 		//Initialize Kings
 		this.chessBoard[0][4].piece = new King(BLACK);
 		this.chessBoard[7][4].piece = new King(WHITE);
+		this.whiteKingSquare = this.chessBoard[7][4];
+		this.blackKingSquare = this.chessBoard[0][4];
 		
 		//Initialize Queens 
 		this.chessBoard[0][3].piece =  new Queen(BLACK);
@@ -259,6 +263,10 @@ public class ChessBoard extends GameBoard{
 			this.chessBoard[endPiece[0]][endPiece[1]].piece = getPromotion(special, playersTurnColor);
 		}
 		
+		if(this.chessBoard[endPiece[0]][endPiece[1]].piece instanceof King) {
+			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() == 'b')this.blackKingSquare = this.chessBoard[endPiece[0]][endPiece[1]];
+			else this.whiteKingSquare = this.chessBoard[endPiece[0]][endPiece[1]];
+		}
 		return true;
 	}
 	
