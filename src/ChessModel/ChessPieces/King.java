@@ -18,9 +18,9 @@ public class King extends ChessPiece {
     	this.firstMove = false;
     }
     
-    public boolean isValidMove(String start, String end, boolean isCapturing) {
-    	if(!super.isValidMove(start, end, isCapturing)) return false;
-    	if(!ChessHelper.isAdjacent(start, end)) return false;
+    public boolean isValidMove(String move, boolean isCapturing) {
+    	if(!super.isValidMove(move, isCapturing)) return false;
+    	if(!ChessHelper.isAdjacent(move)) return false;
     	return true;
     }
  

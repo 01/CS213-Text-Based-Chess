@@ -52,14 +52,14 @@ public class ChessHelper {
 	}
 	
 	public static boolean isDiagonal(String move) {
-		return (Math.abs((move.charAt(0) - move.charAt(2))/(move.charAt(1)-move.charAt(3))) == 1);
+		return (Math.abs((move.charAt(0) - move.charAt(3))/(move.charAt(1)-move.charAt(4))) == 1);
 	}
 	
-	public static boolean isAdjacent(String start, String end) {
-		char startRank = start.charAt(1);
-		char endRank = end.charAt(1);
-		char startFile = start.charAt(0);
-		char endFile = end.charAt(0);
+	public static boolean isAdjacent(String move) {
+		char startRank = move.charAt(1);
+		char endRank = move.charAt(4);
+		char startFile = move.charAt(0);
+		char endFile = move.charAt(3);
 		
 		return ((Math.abs(startRank-endRank)+ Math.abs(startFile-endFile)) == 1);
 	}

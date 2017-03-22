@@ -27,46 +27,54 @@ public class Pawn extends ChessPiece {
 	 * Promotion: If pawn moves all the way to other end then it is "promoted" to players choosing.
 	 */
     
-    public boolean isValidMove(String RankandFile0, String RankandFile1, boolean isCapturing) {
-    	char Rank0 = RankandFile0.charAt(1);
-    	char Rank1 = RankandFile1.charAt(1);
-    	char File0 = RankandFile0.charAt(0);
-    	char File1 =  RankandFile1.charAt(0);
+    public boolean isValidMove(String move, boolean isCapturing) {
+    	System.out.println("isValidMove: " + move);
+    	char startRank = move.charAt(1);
+    	char endRank = move.charAt(4);
+    	char startFile = move.charAt(0);
+    	char endFile = move.charAt(3);
     	
-    	if(!super.isValidMove(RankandFile0, RankandFile1, isCapturing)) return false;
-    	
+    	if(!super.isValidMove(move, isCapturing)) return false;
     	// Pawn can only move forward so File should be same for start and finish unless attacking, but should always be forward
-    	if(Math.abs((File0 - File1)) > 1) return false;
-    	if(Math.abs(File0-File1) > 0 && !isCapturing) return false;			// Can only move diagonal if capturing
-    	if((File0 == File1) && isCapturing) return false;					// Pawn can not capture on vertical move
+    	if(Math.abs(startFile - endFile) > 1) return false;
+    	if(Math.abs(startFile-endFile) > 1 && !isCapturing) return false;
+    	
+    	if((startFile == endFile) && isCapturing) return false;					// Pawn can not capture on vertical move
+    
     	// Check to see what player
     	if(this.color == 'w') {
-    		if((Rank0-Rank1) > 1) return false;
+    		if((startRank-endRank) > 0) return false;
 
-    		if(Rank0 == '2') {
-    			if(Rank1 == '4')this.enPassable = true;
+    		if(startRank == '2') {
+    			if(endRank == '4')this.enPassable = true;
     			return true;
     		}
-    		if(Rank1 == '8') {
+    		if(endRank == '8') {
     			this.isPromotable = true;
+    			return true;
     		}
     	}
     	else {
     		//System.out.println("Start "+ RankandFile0 + "makes it here1");
-    		if((Rank0-Rank1) < 1) return false;
+    		if((startRank-endRank) < 1) return false;
     	
-    		if(Rank0 == '7') {
+    		if(startRank == '7') {
     			//Its first move
-    			if(Rank1 == '5') this.enPassable = true;					// Sets enPassable if the pawn is being moved two spaces
+    			if(endRank == '5') {
+    				this.enPassable = true;	
+    				return true;				// Sets enPassable if the pawn is being moved two spaces
+    			}
     			//System.out.println("Start "+ RankandFile0 + "makes it here");
-    			return true;
+    			
     		}
-    		if(Rank1 == '1') {
+    		if(endRank == '1') {
     			this.isPromotable = true;
+    			return true;
     		}
     	}
 		this.enPassable = false;		// If moved for any non enPassable set no longer enPassable
-    	return true;
+    	this.isPromotable=false;
+		return true;
     }
 }
 
