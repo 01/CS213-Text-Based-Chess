@@ -374,7 +374,7 @@ public class ChessBoard extends GameBoard{
 			int row = OppositeKingSquare.row;
 			int col = OppositeKingSquare.column;
 			row++; col++;
-			if (row<rows || col <columns)
+			if (row< 0 || col == columns)
 				break;
 
 			if(this.chessBoard[row][col].piece!=null){
