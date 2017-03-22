@@ -14,9 +14,9 @@ public class Queen extends ChessPiece {
     }
     
     // Assumes check for something in path
-    public boolean isValidMove(String start, String end, boolean isCapturing) {
-    	if(!super.isValidMove(start, end, isCapturing)) return false;
-    	if(ChessHelper.moveDirection(start +" "+ end) == 4) return false;
+    public boolean isValidMove(String move, boolean isCapturing) {
+    	if(!super.isValidMove(move, isCapturing)) return false;
+    	if(ChessHelper.moveDirection(move) == 4) return false;
     	return true;
     }
 
