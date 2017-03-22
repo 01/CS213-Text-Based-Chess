@@ -2,6 +2,12 @@ package ChessModel.ChessPieces;
 
 import ChessModel.ChessHelper;
 
+/**
+ * Create King object with functionality of ChessPiece
+ * and properties of GamePiece
+ *
+ * @author Sagar Patel, Andrew Khaz
+ */
 public class King extends ChessPiece {
 	public static String name = "King";
     private boolean firstMove = true;

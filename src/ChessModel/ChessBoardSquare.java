@@ -3,6 +3,11 @@ package ChessModel;
 import ChessModel.ChessPieces.ChessPiece;
 import GameModel.BoardSquare;
 
+/**
+ * Holds a piece at a specific square on the 8x8 board
+ *
+ *@author Sagar Patel, Andrew Khaz
+ */
 public class ChessBoardSquare extends BoardSquare {
 	public char color;
 	public char rank, file;

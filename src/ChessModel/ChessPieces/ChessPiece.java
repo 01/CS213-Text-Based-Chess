@@ -3,7 +3,10 @@ package ChessModel.ChessPieces;
 import GameModel.GamePiece;
 
 /**
- * Created by xbbl7mk on 3/3/2017.
+ * ChessPiece overall framework for all moving chess
+ * pieces
+ *
+ * @author Sagar Patel, Andrew Khaz
  */
 public abstract class ChessPiece extends GamePiece {
 

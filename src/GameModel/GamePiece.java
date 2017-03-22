@@ -1,5 +1,10 @@
 package GameModel;
 
+/**
+ * Parameters for all game pieces
+ *
+ * @author Sagar Patel, Andrew Khaz
+ */
 public abstract class GamePiece {
 	public String name;
 	public char color;

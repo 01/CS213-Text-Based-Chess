@@ -1,7 +1,7 @@
 package ChessModel;
-
 import ChessModel.ChessPieces.*;
 import GameModel.GameBoard;
+
 
 public class ChessBoard extends GameBoard{
 	public static final int numRanks = 8;
@@ -16,7 +16,7 @@ public class ChessBoard extends GameBoard{
 	ChessBoardSquare whiteKingSquare, blackKingSquare;
 	
 	public ChessBoardSquare[][] chessBoard;
-	
+
 	public ChessBoard() {
 		super(numRanks, numFiles);
 		this.chessBoard = new ChessBoardSquare[numRanks][numFiles];
@@ -319,7 +319,7 @@ public class ChessBoard extends GameBoard{
 			}
 		}
 
-
+    /*
 		//White Pawn attack Black King
 		if(OppositeKingSquare.piece.getColor() == 'b') {
 			int row = OppositeKingSquare.row;
@@ -368,6 +368,7 @@ public class ChessBoard extends GameBoard{
 			}
 		}
 
+        */
 
 		//upper right diagonal
 		while (true){
@@ -382,7 +383,6 @@ public class ChessBoard extends GameBoard{
 					if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
 						return true;
 			}
-			else break;
 		}
 
 		//upper left diagonal
@@ -398,7 +398,6 @@ public class ChessBoard extends GameBoard{
 					if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
 						return true;
 			}
-			else break;
 		}
 
 		//lower right diagonal
@@ -414,7 +413,6 @@ public class ChessBoard extends GameBoard{
 					if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
 						return true;
 			}
-			else break;
 		}
 
 		//lower left diagonal
@@ -430,7 +428,6 @@ public class ChessBoard extends GameBoard{
 					if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
 						return true;
 			}
-			else break;
 		}
 
 		//System.out.println(OppositeKingSquare.piece.getName()+" "+OppositeKingSquare.piece.getColor());

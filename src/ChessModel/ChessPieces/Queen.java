@@ -3,7 +3,10 @@ package ChessModel.ChessPieces;
 import ChessModel.ChessHelper;
 
 /**
- * Created by xbbl7mk on 3/3/2017.
+ * Create Queen object with functionality of ChessPiece
+ * and properties of GamePiece
+ *
+ * @author Sagar Patel, Andrew Khaz
  */
 public class Queen extends ChessPiece {
 

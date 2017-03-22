@@ -1,7 +1,10 @@
 package ChessModel.ChessPieces;
 
 /**
- * Created by xbbl7mk on 3/3/2017.
+ * Create Rook object with functionality of ChessPiece
+ * and properties of GamePiece
+ *
+ * @author Sagar Patel, Andrew Khaz
  */
 public class Rook extends ChessPiece {
 

@@ -2,6 +2,13 @@ package ChessModel.ChessPieces;
 
 import ChessModel.ChessHelper;
 
+/**
+ * Create Pawn object with functionality of ChessPiece
+ * and properties of GamePiece
+ *
+ * @author Sagar Patel, Andrew Khaz
+ */
+
 public class Pawn extends ChessPiece {
 	private static final String name = "Pawn";
 	private boolean enPassable, isPromotable, isFirstTurn;
