@@ -12,5 +12,4 @@ public abstract class  BoardSquare{
 		this.row = row;
 		this.column = column;
 	}
-	
 }

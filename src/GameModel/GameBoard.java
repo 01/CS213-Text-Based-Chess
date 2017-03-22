@@ -13,5 +13,4 @@ public abstract class GameBoard {
 		this.columns = columns;
 		this.rows = rows;
 	}
-	
 }
