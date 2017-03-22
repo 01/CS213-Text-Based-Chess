@@ -20,9 +20,9 @@ public class Knight extends ChessPiece {
      */
     public boolean isValidMove(String move, boolean isCapturing) {
     	char startRank = move.charAt(1);
-    	char endRank = move.charAt(3);
+    	char endRank = move.charAt(4);
     	char startFile = move.charAt(0);
-    	char endFile = move.charAt(4);
+    	char endFile = move.charAt(3);
     	if(!(super.isValidMove(move, isCapturing))) return false;
     	
     	if(!((Math.abs(startRank-endRank)<= 2) || (Math.abs(startFile - endFile) <= 2))) return false; 		// Either horizontal move or Vertical move is greater than 2 spaces

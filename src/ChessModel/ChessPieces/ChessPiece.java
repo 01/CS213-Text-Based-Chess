@@ -29,7 +29,6 @@ public abstract class ChessPiece extends GamePiece {
     	
     	if(Rank0 < '1' || Rank1 < '1' || Rank1 >'8' || Rank0 > '8') return false;
     	if(File0 < 'a' || File1 < 'a' || File1 > 'h' || File0 > 'h') return false;
-    	System.out.println("isValidSuper");
     	return true;	
     }
 

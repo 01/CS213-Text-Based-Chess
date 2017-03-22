@@ -158,8 +158,8 @@ public class ChessBoard extends GameBoard{
 	}
 	
 	public void printChessBoard() {
-		System.out.println("\n-----------------------------");
-		System.out.println("Initial Positions");
+		//System.out.println("\n-----------------------------");
+		//System.out.println("Initial Positions");
 		for(int i = 0; i < rows; i++) {
 			for(int k =0; k < columns; k++) {
 				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getName());
@@ -180,7 +180,7 @@ public class ChessBoard extends GameBoard{
 		boolean isCapturing = false;
 		int moveType = ChessHelper.moveDirection(move);
 		
-		System.out.println("\nAttempting move: " + move);
+		//System.out.println("\nAttempting move: " + move);
 		//if(this.chessBoard[endPiece[0]-1][endPiece[1]].piece != null)System.out.println(this.chessBoard[endPiece[0]-1][endPiece[1]].piece.getEnPassable());
 		ChessBoardSquare startSquare = this.chessBoard[startPiece[0]][startPiece[1]];
 		ChessBoardSquare endSquare = this.chessBoard[endPiece[0]][endPiece[1]];
@@ -213,14 +213,14 @@ public class ChessBoard extends GameBoard{
 			
 		}
 		if(this.pieceInPath(move) && (startSquare.piece.getName() != 'N')) return false;
-		System.out.println("Makes it past piece: " + isCapturing);
+		//System.out.println("Makes it past piece: " + isCapturing);
 		if(!(startSquare.piece.isValidMove(move, isCapturing))) return false;
 		
 		return true;
 		
 	}
 	
-	public void makeMove(String move, char playersTurnColor) {
+	public boolean makeMove(String move, char playersTurnColor) {
 		String [] moveParse = move.split(" ");
 		String special = null;
 		special = (moveParse.length == 3) ? moveParse[2] : null;
@@ -236,8 +236,7 @@ public class ChessBoard extends GameBoard{
 		
 		
 		if(!this.attemptMove(move, playersTurnColor)) {
-			System.out.println("\nInvalid Move " + start + " " + end);
-			return;
+			return false;
 		}
 	
 		
@@ -259,6 +258,8 @@ public class ChessBoard extends GameBoard{
 		if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getName() == 'P' && this.chessBoard[endPiece[0]][endPiece[1]].piece.getPromotable()) {
 			this.chessBoard[endPiece[0]][endPiece[1]].piece = getPromotion(special, playersTurnColor);
 		}
+		
+		return true;
 	}
 	
 	public boolean isCastling(String move) {

@@ -4,12 +4,13 @@ import ChessModel.ChessHelper;
 
 public class Pawn extends ChessPiece {
 	private static final String name = "Pawn";
-	private boolean enPassable, isPromotable;
+	private boolean enPassable, isPromotable, isFirstTurn;
 
     public Pawn(char color) {
         super(name, color);
         this.enPassable = false;
         this.isPromotable = false;
+        this.isFirstTurn = true;
     }
     
     public boolean getEnPassable(){
@@ -18,6 +19,10 @@ public class Pawn extends ChessPiece {
     
     public boolean getPromotable() {
     	return this.isPromotable;
+    }
+    
+    public boolean getFirstTurn() {
+    	return this.isFirstTurn;
     }
     /* Pawn can move only forward, Pawn can move two spaces only on first turn 
 	 * Pawn can not jump over pieces on initial double move
@@ -28,7 +33,7 @@ public class Pawn extends ChessPiece {
 	 */
     
     public boolean isValidMove(String move, boolean isCapturing) {
-    	System.out.println("isValidMove: " + move);
+    	//System.out.println("isValidMove: " + move);
     	char startRank = move.charAt(1);
     	char endRank = move.charAt(4);
     	char startFile = move.charAt(0);
@@ -37,20 +42,23 @@ public class Pawn extends ChessPiece {
     	if(!super.isValidMove(move, isCapturing)) return false;
     	// Pawn can only move forward so File should be same for start and finish unless attacking, but should always be forward
     	if(Math.abs(startFile - endFile) > 1) return false;
-    	if(Math.abs(startFile-endFile) > 1 && !isCapturing) return false;
-    	
+    	if(Math.abs(startFile-endFile) > 0 && !isCapturing) return false;
     	if((startFile == endFile) && isCapturing) return false;					// Pawn can not capture on vertical move
-    
+    	if(Math.abs(startRank-endRank) > 2 || (Math.abs(startRank-endRank)==2 & !this.getFirstTurn())) return false;
     	// Check to see what player
     	if(this.color == 'w') {
     		if((startRank-endRank) > 0) return false;
 
     		if(startRank == '2') {
-    			if(endRank == '4')this.enPassable = true;
+    			if(endRank == '4') {
+    				this.enPassable = true;
+    				this.isFirstTurn = false;
+    			}
     			return true;
     		}
     		if(endRank == '8') {
     			this.isPromotable = true;
+    			this.isFirstTurn = false;
     			return true;
     		}
     	}
@@ -61,7 +69,8 @@ public class Pawn extends ChessPiece {
     		if(startRank == '7') {
     			//Its first move
     			if(endRank == '5') {
-    				this.enPassable = true;	
+    				this.enPassable = true;
+    				this.isFirstTurn = false;
     				return true;				// Sets enPassable if the pawn is being moved two spaces
     			}
     			//System.out.println("Start "+ RankandFile0 + "makes it here");
@@ -69,9 +78,11 @@ public class Pawn extends ChessPiece {
     		}
     		if(endRank == '1') {
     			this.isPromotable = true;
+    			this.isFirstTurn = false;
     			return true;
     		}
     	}
+    	this.isFirstTurn = false;
 		this.enPassable = false;		// If moved for any non enPassable set no longer enPassable
     	this.isPromotable=false;
 		return true;
