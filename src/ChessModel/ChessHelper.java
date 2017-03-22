@@ -52,6 +52,7 @@ public class ChessHelper {
 	}
 	
 	public static boolean isDiagonal(String move) {
+		if(move.charAt(1)-move.charAt(4) == 0) return false;
 		return (Math.abs((move.charAt(0) - move.charAt(3))/(move.charAt(1)-move.charAt(4))) == 1);
 	}
 	

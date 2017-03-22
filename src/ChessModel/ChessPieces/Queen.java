@@ -16,7 +16,7 @@ public class Queen extends ChessPiece {
     // Assumes check for something in path
     public boolean isValidMove(String move, boolean isCapturing) {
     	if(!super.isValidMove(move, isCapturing)) return false;
-    	if(ChessHelper.moveDirection(move) == 4) return false;
+    	if(ChessHelper.moveDirection(move) == 6) return false;
     	return true;
     }
 

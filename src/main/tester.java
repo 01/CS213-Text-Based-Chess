@@ -30,6 +30,7 @@ public class tester {
 				if(command==null) {
 					command = input.nextLine();
 				}
+				System.out.print(command + "\n");
 				game.giveCommand(command);
 				
 			}
