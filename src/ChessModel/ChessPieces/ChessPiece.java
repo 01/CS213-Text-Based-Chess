@@ -48,6 +48,9 @@ public abstract class ChessPiece extends GamePiece {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public void setChecked(boolean b) {
+	}
     
   
 }
