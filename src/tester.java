@@ -22,6 +22,8 @@ public class tester {
     }
     
     public static void testCastling() {
+    	// Test Castling to File H Rook
+    	// White 
     	board.makeMove("f2 f4", 'w');
     	board.makeMove("e2 e4", 'w');
     	board.makeMove("f1 c4", 'w');
@@ -30,6 +32,40 @@ public class tester {
     	board.printChessBoard();
     	board.makeMove("e1 g1", 'w');
     	board.printChessBoard();
+    	//Black
+    	board.makeMove("f7 f5", 'b');
+    	board.makeMove("e7 e5", 'b');
+    	board.makeMove("f8 c5", 'b');
+    	board.printChessBoard();
+    	board.makeMove("g8 h6", 'b');
+    	board.printChessBoard();
+    	board.makeMove("e8 g8", 'b');
+    	board.printChessBoard();
+    	
+    	board = new ChessBoard();
+    	board.printChessBoard();
+    	
+    	//Testing Castling to A File Rook
+    	// White 
+    	board.makeMove("c2 c4", 'w');
+    	board.makeMove("b2 b4", 'w');
+    	board.makeMove("d1 a4", 'w');
+    	board.printChessBoard();
+    	board.makeMove("c1 b2", 'w');
+    	board.printChessBoard();
+    	board.makeMove("b1 c3", 'w');
+    	board.printChessBoard();
+    	board.makeMove("e1 c1", 'w');
+    	board.printChessBoard();
+    	//Black
+    	/*board.makeMove("f7 f5", 'b');
+    	board.makeMove("e7 e5", 'b');
+    	board.makeMove("f8 c5", 'b');
+    	board.printChessBoard();
+    	board.makeMove("g8 h6", 'b');
+    	board.printChessBoard();
+    	board.makeMove("e8 g8", 'b');
+    	board.printChessBoard();*/
     	
     }
     

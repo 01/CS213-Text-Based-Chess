@@ -28,14 +28,17 @@ public class ChessHelper {
 			return (startCoords[1] > endCoords[1]) ? 1: 2;
 		}
 		else if(startCoords[1] == endCoords[1]) {
-			return (startCoords[0] > endCoords[0]) ? 3: 5;
+			return (startCoords[0] > endCoords[0]) ? 3: 4;
 		}
-		else if (isDiagonal(start, end)) return 5;
+		else if (isDiagonal(move)) return 5;
 		else return 6;
 	}
 	
-	public static int verticalMoveDirection(String start, String end) {
+	public static int verticalMoveDirection(String move) {
 		// 1 = UR, 2 = UL, 3 = LR, 4= LL
+		String[] moveParse = move.split(" ");
+		String start = moveParse[0];
+		String end = moveParse[1];
 		int [] startCoords = ChessHelper.stringToCoordinate(start);
 		int [] endCoords = ChessHelper.stringToCoordinate(end);
 		if(startCoords[0] < endCoords[0]) { 						  	// Moving down board
@@ -48,8 +51,8 @@ public class ChessHelper {
 		}
 	}
 	
-	public static boolean isDiagonal(String start, String end) {
-		return (Math.abs((start.charAt(0) - end.charAt(0))/(start.charAt(1)-end.charAt(1))) == 1);
+	public static boolean isDiagonal(String move) {
+		return (Math.abs((move.charAt(0) - move.charAt(2))/(move.charAt(1)-move.charAt(3))) == 1);
 	}
 	
 	public static boolean isAdjacent(String start, String end) {

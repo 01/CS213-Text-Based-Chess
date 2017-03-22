@@ -6,7 +6,10 @@ import GameModel.GameBoard;
 public class ChessBoard extends GameBoard{
 	public static final int numRanks = 8;
 	public static final int numFiles = 8;
-
+		;
+	public static final String BLACK_SQUARE = "##";
+	public static final String WHITE_SQUARE = "  ";
+	public static final String FILE_ROW = " a  b  c  d  e  f  g  h";
 	public static final char WHITE = 'w';
 	public static final char BLACK = 'b';
 	
@@ -25,12 +28,12 @@ public class ChessBoard extends GameBoard{
 			colorTrack--;
 			for(int k =0; k < columns; k++) {
 				if(colorTrack%2==0) {
-					this.chessBoard[i][k] = new ChessBoardSquare(i, k, null, 'W');
+					this.chessBoard[i][k] = new ChessBoardSquare(i, k, null, WHITE);
 					colorTrack++;
 					//System.out.println(((ChessBoardSquare)GameBoard[i][k]).file);
 				}
 				else {
-					this.chessBoard[i][k] = new ChessBoardSquare(i, k, null, 'B');
+					this.chessBoard[i][k] = new ChessBoardSquare(i, k, null, BLACK);
 					//System.out.println(((ChessBoardSquare)GameBoard[i][k]).file);
 					colorTrack++;
 					
@@ -42,14 +45,14 @@ public class ChessBoard extends GameBoard{
 	public void initializeChessBoard() {
 		// Initialize Pawns
 		for(int i = 0; i < numRanks; i++ ) {
-			this.chessBoard[1][i].piece = (Pawn)(new Pawn(BLACK));
-			this.chessBoard[6][i].piece = (Pawn)(new Pawn(WHITE));
+			this.chessBoard[1][i].piece = new Pawn(BLACK);
+			this.chessBoard[6][i].piece = new Pawn(WHITE);
 		}
 		
 		// Initiaze Rooks
-		this.chessBoard[0][0].piece = (Rook) (new Rook(BLACK));
-		this.chessBoard[0][7].piece = (Rook) (new Rook(BLACK));
-		this.chessBoard[7][0].piece = (Rook) (new Rook(WHITE));
+		this.chessBoard[0][0].piece = new Rook(BLACK);
+		this.chessBoard[0][7].piece = new Rook(BLACK);
+		this.chessBoard[7][0].piece = new Rook(WHITE);
 		this.chessBoard[7][7].piece = new Rook(WHITE);
 		
 		//Initialize Knights
@@ -80,47 +83,44 @@ public class ChessBoard extends GameBoard{
 			System.out.println("");
 			for(int k =0; k < columns; k++) {
 				System.out.print(this.chessBoard[i][k].file +""+ this.chessBoard[i][k].rank + " ");
-	
 			}
 		}
 	}
+	
 	/* pieceInPath assumes valid move for ChessPiece type */
-	public boolean pieceInPath(String start, String end) {
-		int moveType = ChessHelper.moveDirection(start + " " + end);
-		int [] startCoordinates = ChessHelper.stringToCoordinate(start);
-		int [] endCoordinates = ChessHelper.stringToCoordinate(end);
+	public boolean pieceInPath(String move) {
+		int moveType = ChessHelper.moveDirection(move);
+		String [] moveParse = move.split(" ");
+		int [] startCoordinates = ChessHelper.stringToCoordinate(moveParse[0]);
+		int [] endCoordinates = ChessHelper.stringToCoordinate(moveParse[1]);
 		
 		switch (moveType) {
-			case 1 :										// Moving Horizontally
-				if(startCoordinates[1] < endCoordinates[1]) {
-						for(int k = (startCoordinates[1]+1); k < endCoordinates[1]; k++) {
-							if(this.chessBoard[startCoordinates[0]][k].piece != null) return true;
-						}
-						return false;
+			case 1 :										// Moving Horizontally Left
+				for(int k = (endCoordinates[1] + 1); k < startCoordinates[1]; k++){
+					if(this.chessBoard[startCoordinates[0]][k].piece != null) return true;
 				}
-				else {
-					for(int k = (endCoordinates[1] + 1); k < startCoordinates[1]; k++){
-						if(this.chessBoard[startCoordinates[0]][k].piece != null) return true;
-					}
-					return false;
-				}
+				return false;
 				
-			case 2 :									// Moving Vertically
-				if(startCoordinates[0] < endCoordinates[0]) {
+			case 2 :
+				for(int k = (startCoordinates[1]+1); k < endCoordinates[1]; k++) {
+					if(this.chessBoard[startCoordinates[0]][k].piece != null) return true;
+				}
+				return false;
+				
+			case 3:
+				for(int i = (endCoordinates[0] + 1); i < startCoordinates[0]; i++) {
+					if(this.chessBoard[i][endCoordinates[0]].piece != null) return true;
+				}
+				return false;
+				
+			case 4: 
 					for(int i = (startCoordinates[0] + 1); i < endCoordinates[0]; i++ ) {
 						if(this.chessBoard[i][startCoordinates[1]].piece != null) return true;
 					}
-					return false;
-				}
-				else {
-					for(int i = (endCoordinates[0] + 1); i < startCoordinates[0]; i++) {
-						if(this.chessBoard[i][endCoordinates[0]].piece != null) return true;
-					}
-					return false;
-				}
-			
-			case 3 :								// Moving Diagonal
-				switch(ChessHelper.verticalMoveDirection(start, end)) {
+					return false;		
+					
+			case 5 :								// Moving Diagonal
+				switch(ChessHelper.verticalMoveDirection(move)) {
 					case 1 :						// Moving Upper Right Direction
 						for(int i = 0; i < (startCoordinates[0]-endCoordinates[0]-1); i++) {
 							if(this.chessBoard[endCoordinates[0]+1+i][endCoordinates[1]-1-i].piece != null) return true;
@@ -140,7 +140,6 @@ public class ChessBoard extends GameBoard{
 						
 						return false;
 						
-					
 					case 4: 						// Moving Lower Left
 						for(int i = 0; i < (endCoordinates[0] - startCoordinates[0]-1); i++) {
 							if(this.chessBoard[startCoordinates[0] + 1 + i][startCoordinates[1]-1-i].piece != null) return true;
@@ -162,43 +161,47 @@ public class ChessBoard extends GameBoard{
 		System.out.println("\n-----------------------------");
 		System.out.println("Initial Positions");
 		for(int i = 0; i < rows; i++) {
-			
-			System.out.println("");
 			for(int k =0; k < columns; k++) {
-				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getName() + " ");
-				else if(this.chessBoard[i][k].color == 'B')System.out.print("## ");
-				else System.out.print("   ");
+				if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getName());
+				else if(this.chessBoard[i][k].color == BLACK)System.out.print(BLACK_SQUARE);
+				else System.out.print(WHITE_SQUARE);
+				System.out.print(" ");
 			}
-			System.out.print(8-i);
+			System.out.print(8-i + "\n");
 		}
-		System.out.println("\n a  b  c  d  e  f  g  h");
+		System.out.println(FILE_ROW);
 		
 	}
 	
-	public boolean attemptMove(String start, String end, char playersTurnColor) {
-		int [] startPiece = ChessHelper.stringToCoordinate(start);
-		int [] endPiece = ChessHelper.stringToCoordinate(end);
+	public boolean attemptMove(String move, char playersTurnColor) {
+		String [] moveParse = move.split(" ");
+		int [] startPiece = ChessHelper.stringToCoordinate(moveParse[0]);
+		int [] endPiece = ChessHelper.stringToCoordinate(moveParse[1]);
 		boolean isCapturing = false;
+		int moveType = ChessHelper.moveDirection(move);
 		
-		System.out.println("\nAttempting move: " + start + " " + end + " " + endPiece[0]);
+		System.out.println("\nAttempting move: " + move);
 		//if(this.chessBoard[endPiece[0]-1][endPiece[1]].piece != null)System.out.println(this.chessBoard[endPiece[0]-1][endPiece[1]].piece.getEnPassable());
-		
-		if(this.chessBoard[startPiece[0]][startPiece[1]].piece == null || this.chessBoard[startPiece[0]][startPiece[1]].piece.getColor() != playersTurnColor) return false;
-		if(this.chessBoard[endPiece[0]][endPiece[1]].piece != null) {
-			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() == playersTurnColor) return false; 
-			if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getColor() != playersTurnColor) isCapturing = true;
+		ChessBoardSquare startSquare = this.chessBoard[startPiece[0]][startPiece[1]];
+		ChessBoardSquare endSquare = this.chessBoard[endPiece[0]][endPiece[1]];
+		if(startSquare.piece == null) return false; 
+		if(startSquare.piece.getColor() != playersTurnColor) return false;
+		if(endSquare.piece != null) {
+			if(endSquare.piece.getColor() == playersTurnColor) return false; 
+			if(endSquare.piece.getColor() != playersTurnColor) isCapturing = true;
 		}
 		//enPasse Check
-		else if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'P' && (endPiece[0] == 2 || endPiece[0] == 5) && ChessHelper.isDiagonal(start, end)) {
+		else if(startSquare.piece.getName() == 'P' && (endPiece[0] == 2 || endPiece[0] == 5) && ChessHelper.isDiagonal(move)) {
 				if(startPiece[0] > endPiece[0]) {
-					if(this.chessBoard[endPiece[0] + 1][endPiece[1]].piece.getEnPassable()) return true;
+					if(endSquare.piece.getEnPassable()) return true;
 				}
 				else {
-					if(this.chessBoard[endPiece[0] -1][endPiece[1]].piece.getEnPassable()) return true;
+					if(endSquare.piece.getEnPassable()) return true;
 				}
 		}
-		else if(isCastling(startPiece, endPiece, start+ " " +end)) {
-			if(startPiece[1] > endPiece[1]) {
+		// Castling check, should refactor to make the Rook placement part of makeMove
+		else if(isCastling(move)) {
+			if(moveType == 1) {
 				this.chessBoard[startPiece[0]][startPiece[1]-1].piece = this.chessBoard[endPiece[0]][endPiece[1]-2].piece;
 				this.chessBoard[endPiece[0]][endPiece[1]-2].piece = null;
 			}
@@ -209,9 +212,9 @@ public class ChessBoard extends GameBoard{
 			return true;
 			
 		}
-		if(this.pieceInPath(start, end) && (this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() != 'N')) return false;
+		if(this.pieceInPath(move) && (startSquare.piece.getName() != 'N')) return false;
 		//System.out.println("Makes it past pieceInPath Check");
-		if(!(this.chessBoard[startPiece[0]][startPiece[1]].piece.isValidMove(start, end, isCapturing))) return false;
+		if(!(startSquare.piece.isValidMove(move, isCapturing))) return false;
 		
 		return true;
 		
@@ -224,16 +227,23 @@ public class ChessBoard extends GameBoard{
 		String start = moveParse[0];
 		String end = moveParse[1];
 		
-		if(!this.attemptMove(start, end, playersTurnColor)) {
-			System.out.println("\nInvalid Move " + start + " " + end);
-			return;
-		}
 		int [] startPiece = ChessHelper.stringToCoordinate(start);
 		int [] endPiece = ChessHelper.stringToCoordinate(end);
 		
+		ChessBoardSquare startSquare = this.chessBoard[startPiece[0]][startPiece[1]];
+		ChessBoardSquare endSquare = this.chessBoard[endPiece[0]][endPiece[1]];
+		
+		
+		
+		if(!this.attemptMove(move, playersTurnColor)) {
+			System.out.println("\nInvalid Move " + start + " " + end);
+			return;
+		}
+	
+		
 		// EnPasse
-		if(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'P') {
-			if(ChessHelper.isDiagonal(start, end) && this.chessBoard[endPiece[0]][endPiece[1]].piece == null) {
+		if(startSquare.piece.getName() == 'P') {
+			if(ChessHelper.isDiagonal(move) && endSquare.piece == null) {
 				if(startPiece[0] > endPiece[0]) {
 					this.chessBoard[endPiece[0] + 1][endPiece[1]].piece = null;
 				}
@@ -243,38 +253,36 @@ public class ChessBoard extends GameBoard{
 			}
 		}
 		
-		this.chessBoard[endPiece[0]][endPiece[1]].piece = this.chessBoard[startPiece[0]][startPiece[1]].piece;
+		this.chessBoard[endPiece[0]][endPiece[1]].piece = startSquare.piece;
 		this.chessBoard[startPiece[0]][startPiece[1]].piece = null;
-		if(this.chessBoard[endPiece[0]][endPiece[1]].piece.getName() == 'P' && this.chessBoard[endPiece[0]][endPiece[1]].piece.getPromotable()) {
+		if(endSquare.piece.getName() == 'P' && endSquare.piece.getPromotable()) {
 			this.chessBoard[endPiece[0]][endPiece[1]].piece = getPromotion(special, playersTurnColor);
 		}
 	}
 	
-	public boolean isCastling(int[] startPiece, int[] endPiece, String move) {
+	public boolean isCastling(String move) {
 		int moveDirection = ChessHelper.moveDirection(move);
 		String [] moveParse = move.split(" ");
-		String start = moveParse[0];
-		String end = moveParse[1];
+		int [] startPiece = ChessHelper.stringToCoordinate(moveParse[0]);
+		int [] endPiece = ChessHelper.stringToCoordinate(moveParse[1]);
 		if(!(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'K') || !this.chessBoard[startPiece[0]][startPiece[1]].piece.isFirstMove()) return false;
-		if(moveDirection == 1 || moveDirection != 2) return false;
 		if(Math.abs(startPiece[1]-endPiece[1])!= 2) return false;
 		if(moveDirection == 1) {
 			if(!(this.chessBoard[endPiece[0]][endPiece[1] - 2].piece.getName() == 'R') || !this.chessBoard[endPiece[0]][endPiece[1] - 2].piece.isFirstMove()) return false;
 
 		}
-		if(moveDirection == 2) {
+		else if(moveDirection == 2) {
 			if(!(this.chessBoard[endPiece[0]][endPiece[1] + 1].piece.getName() == 'R') || !this.chessBoard[endPiece[0]][endPiece[1] + 1].piece.isFirstMove()) return false;
 		}
-		if(pieceInPath(start, end) || this.chessBoard[endPiece[0]][endPiece[1]].piece != null) return false;
+		else{
+			if(pieceInPath(move) || this.chessBoard[endPiece[0]][endPiece[1]].piece != null) return false;
+		}
 		
 		return true;
 		
 		
 	}
 	
-	public boolean isCastableFirstMoves(int [] firstPiece, int[] endPiece) {
-		if()
-	}
 	public ChessPiece getPromotion(String special, char playersTurnColor) {
 		if(special == null) special = "Q";
 		switch(special.toLowerCase().charAt(0)) {
