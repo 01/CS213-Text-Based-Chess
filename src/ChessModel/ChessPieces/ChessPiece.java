@@ -50,6 +50,12 @@ public abstract class ChessPiece extends GamePiece {
 	}
 
 	public void setChecked(boolean b) {
+		
+	}
+
+	public boolean getIsChecked() {
+		// TODO Auto-generated method stub
+		return false;
 	}
     
   

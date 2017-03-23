@@ -12,6 +12,7 @@ public class ChessBoard extends GameBoard{
     public static final String FILE_ROW = " a  b  c  d  e  f  g  h";
     public static final char WHITE = 'w';
     public static final char BLACK = 'b';
+   
 
     ChessBoardSquare whiteKingSquare, blackKingSquare;
 
@@ -184,8 +185,6 @@ public class ChessBoard extends GameBoard{
         boolean isCapturing = false;
         int moveType = ChessHelper.moveDirection(move);
 
-        //System.out.println("\nAttempting move: " + move);
-        //if(this.chessBoard[endPiece[0]-1][endPiece[1]].piece != null)System.out.println(this.chessBoard[endPiece[0]-1][endPiece[1]].piece.getEnPassable());
         ChessBoardSquare startSquare = this.chessBoard[startPiece[0]][startPiece[1]];
         ChessBoardSquare endSquare = this.chessBoard[endPiece[0]][endPiece[1]];
         if(startSquare.piece == null) return false;
@@ -194,6 +193,7 @@ public class ChessBoard extends GameBoard{
             if(endSquare.piece.getColor() == playersTurnColor) return false;
             if(endSquare.piece.getColor() != playersTurnColor) isCapturing = true;
         }
+        if(startSquare.piece instanceof King && !isSafe(moveParse[0], playerTurnsColor) return false;
         //enPasse Check
         else if(startSquare.piece.getName() == 'P' && (endPiece[1] == 3 || endPiece[1] == 6) && ChessHelper.isDiagonal(move)) {
             if(startPiece[1] > endPiece[1]) {
@@ -231,7 +231,7 @@ public class ChessBoard extends GameBoard{
         String start = moveParse[0];
         String end = moveParse[1];
 
-        int [] startPiece = ChessHelper.stringToCoordinate(start);
+        int [] startPiece = ChessHelper.stringToCoordinate(start); 
         int [] endPiece = ChessHelper.stringToCoordinate(end);
 
         ChessBoardSquare startSquare = this.chessBoard[startPiece[0]][startPiece[1]];
@@ -269,200 +269,109 @@ public class ChessBoard extends GameBoard{
         }
 
         System.out.println("/////////////////////////////");
-        System.out.println(ifCheck(playersTurnColor));
+        System.out.println(isCheck(moveParse[1], playersTurnColor));
         System.out.println("/////////////////////////////");
 
         return true;
     }
-
-    public boolean ifCheck(char playersTurnColor){
-
-        ChessBoardSquare OppositeKingSquare=this.chessBoard[0][0];
-        if (playersTurnColor =='w') OppositeKingSquare = blackKingSquare;
-        else if (playersTurnColor == 'b') OppositeKingSquare=whiteKingSquare;
-
-        //horizontal right
-        for (int k = OppositeKingSquare.column;k<columns;k++){
-            if(this.chessBoard[OppositeKingSquare.row][k].piece!=null) {
-                // System.out.println(this.chessBoard[OppositeKingSquare.row][k].piece.getColor()+" "+this.chessBoard[OppositeKingSquare.row][k].piece.getName());
-                if (this.chessBoard[OppositeKingSquare.row][k].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'Q' || this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'R')
-                        return true;
-            }
+    
+    public boolean isCheck(String location, char playersTurnColor) {
+    	int [] startPiece = ChessHelper.stringToCoordinate(location); 
+    	ChessBoardSquare opponentKingSquare = (playersTurnColor == 'b') ? this.whiteKingSquare: this.blackKingSquare;
+    	ChessPiece Piece = this.chessBoard[startPiece[0]][startPiece[1]].piece;
+        if(Piece == null) return false;
+        if(Piece.isValidMove((location + " " + opponentKingSquare.file + opponentKingSquare.rank), true)) {
+        	this.chessBoard[opponentKingSquare.row][opponentKingSquare.column].piece.setChecked(true);
+        	return true;
         }
-
-        //horizontal left
-        for (int k = OppositeKingSquare.column;0<k;k--){
-            if(this.chessBoard[OppositeKingSquare.row][k].piece!=null) {
-                //System.out.println(this.chessBoard[OppositeKingSquare.row][k].piece.getColor()+" "+this.chessBoard[OppositeKingSquare.row][k].piece.getName());
-                if (this.chessBoard[OppositeKingSquare.row][k].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'Q' || this.chessBoard[OppositeKingSquare.row][k].piece.getName() == 'R')
-                        return true;
-            }
-        }
-
-        //vertical right
-        for (int i = OppositeKingSquare.row;i<rows;i++){
-            if(this.chessBoard[i][OppositeKingSquare.column].piece!=null){
-                if (this.chessBoard[i][OppositeKingSquare.column].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'Q' || this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'R' )
-                        return true;
-            }
-        }
-
-        //vertical left
-        for (int i = OppositeKingSquare.row;0<i;i--){
-            if(this.chessBoard[i][OppositeKingSquare.column].piece!=null){
-                if (this.chessBoard[i][OppositeKingSquare.column].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'Q' || this.chessBoard[i][OppositeKingSquare.column].piece.getName() == 'R' )
-                        return true;
-            }
-        }
-
-
-        //White Pawn attack Black King
-        if(OppositeKingSquare.piece.getColor() == 'b') {
-            int row = OppositeKingSquare.row;
-            int col = OppositeKingSquare.column;
-
-            while (true) {
-                row++;
-                col--;
-                if (0 < col || row < rows) break;
-
-                if (this.chessBoard[row][col].piece.getColor() == 'w' || this.chessBoard[row][col].piece.getName() == 'P')
-                    return true;
-
-                row = row - 2;
-                if (0 < row) break;
-
-                if (this.chessBoard[row][col].piece.getColor() == 'w' || this.chessBoard[row][col].piece.getName() == 'P')
-                    return true;
-
-                break;
-            }
-        }
-
-        //Black Pawn attack Black King
-        if(OppositeKingSquare.piece.getColor() == 'w'){
-            int row = OppositeKingSquare.row;
-            int col = OppositeKingSquare.column;
-
-            while (true) {
-                row++;
-                col++;
-                if (col < columns || row < rows)
-                    break;
-
-                if (this.chessBoard[row][col].piece.getColor() == 'b' || this.chessBoard[row][col].piece.getName() == 'P')
-                    return true;
-
-                row = row - 2;
-                if (0 < row)
-                    break;
-
-                if (this.chessBoard[row][col].piece.getColor() == 'b' || this.chessBoard[row][col].piece.getName() == 'P')
-                    return true;
-
-                break;
-            }
-        }
-
-
-        //upper right diagonal
-        while (true){
-            int row = OppositeKingSquare.row;
-            int col = OppositeKingSquare.column;
-            row++; col++;
-            if (row< 0 || col == columns)
-                break;
-
-            if(this.chessBoard[row][col].piece!=null){
-                if (this.chessBoard[row][col].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
-                        return true;
-            }
-            else break;
-        }
-
-        //upper left diagonal
-        while (true){
-            int row = OppositeKingSquare.row;
-            int col = OppositeKingSquare.column;
-            row--; col++;
-            if (row<0 || col <columns)
-                break;
-
-            if(this.chessBoard[row][col].piece!=null){
-                if (this.chessBoard[row][col].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
-                        return true;
-            }
-            else break;
-        }
-
-        //lower right diagonal
-        while (true){
-            int row = OppositeKingSquare.row;
-            int col = OppositeKingSquare.column;
-            row++; col--;
-            if (row<rows || 0<col )
-                break;
-
-            if(this.chessBoard[row][col].piece!=null){
-                if (this.chessBoard[row][col].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
-                        return true;
-            }
-            else break;
-        }
-
-        //lower left diagonal
-        while (true){
-            int row = OppositeKingSquare.row;
-            int col = OppositeKingSquare.column;
-            row--; col--;
-            if (0<row || 0<col)
-                break;
-
-            if(this.chessBoard[row][col].piece!=null){
-                if (this.chessBoard[row][col].piece.getColor() == playersTurnColor)
-                    if (this.chessBoard[row][col].piece.getName() == 'Q' || this.chessBoard[row][col].piece.getName() == 'B' )
-                        return true;
-            }
-            else break;
-        }
-
-        //System.out.println(OppositeKingSquare.piece.getName()+" "+OppositeKingSquare.piece.getColor());
-
         return false;
     }
-
-
-    public boolean isCastling(String move) {
-        int moveDirection = ChessHelper.moveDirection(move);
-        String [] moveParse = move.split(" ");
-        int [] startPiece = ChessHelper.stringToCoordinate(moveParse[0]);
-        int [] endPiece = ChessHelper.stringToCoordinate(moveParse[1]);
-        if(!(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'K') || !this.chessBoard[startPiece[0]][startPiece[1]].piece.isFirstMove()) return false;
-        if(Math.abs(startPiece[1]-endPiece[1])!= 2) return false;
-        if(moveDirection == 1) {
-            if(!(this.chessBoard[endPiece[0]][endPiece[1] - 2].piece.getName() == 'R') || !this.chessBoard[endPiece[0]][endPiece[1] - 2].piece.isFirstMove()) return false;
-
-        }
-        else if(moveDirection == 2) {
-            if(!(this.chessBoard[endPiece[0]][endPiece[1] + 1].piece.getName() == 'R') || !this.chessBoard[endPiece[0]][endPiece[1] + 1].piece.isFirstMove()) return false;
-        }
-        else{
-            if(pieceInPath(move) || this.chessBoard[endPiece[0]][endPiece[1]].piece != null) return false;
-        }
-
-        return true;
-
-
+    
+    public boolean isCheckMate(char playersTurnColor) {
+    	ChessBoardSquare checkedKingSquare = (playersTurnColor == 'b') ? blackKingSquare : whiteKingSquare;
+    	if(!checkedKingSquare.piece.getIsChecked()) return false;
+    	// Check possible moves
+    	String possibleLocation = checkedKingSquare.file + "" + checkedKingSquare.rank;
+    	// Check moving vertical up
+    	possibleLocation = checkedKingSquare.file +  "" + (checkedKingSquare.rank + 1);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		// Check moving vertical down
+		possibleLocation = checkedKingSquare.file +  "" + (checkedKingSquare.rank - 1);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		// Checking moving horiztonal right
+		possibleLocation = (checkedKingSquare.file +1) +  "" + checkedKingSquare.rank;
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		//Check moving horiztonal left
+		possibleLocation = (checkedKingSquare.file -1) +  "" + checkedKingSquare.rank;
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		//Check moving diagonal top right
+		possibleLocation = (checkedKingSquare.file +1) +  "" + (checkedKingSquare.rank+1);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		//Check moving diagonal top left
+		possibleLocation = (checkedKingSquare.file -1) +  "" + (checkedKingSquare.rank+1);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		//Check moving diagonal bottom right
+		possibleLocation = (checkedKingSquare.file +1) +  "" + (checkedKingSquare.rank-1);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+				
+		//Check moving diagonal bottom left
+		possibleLocation = (checkedKingSquare.file -1) +  "" + (checkedKingSquare.rank -1);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
+		
+		// If King cant move, find pieces putting it in check and see if they can be attacked
+    	
     }
 
-    public ChessPiece getPromotion(String special, char playersTurnColor) {
+    public boolean isSafe(String kingLoc, char playersTurnColor) {
+	  ChessBoardSquare current;
+	  String start;
+	  for(int i = 0; i < columns; i++) {
+		  for(int k = 0; k < rows; k++) {
+			   current = this.chessBoard[k][i];
+			   if(current.piece != null) {
+				   if(current.piece.getColor() != playersTurnColor) {
+					   start = current.file + "" + current.rank;
+					   return current.piece.isValidMove(start + " " + kingLoc, true) ? false : true;
+				   }
+			   }			   
+		  }
+	  }
+	  
+	  return false;  
+  }
+
+  
+
+	public boolean isCastling(String move) {
+	    int moveDirection = ChessHelper.moveDirection(move);
+	    String [] moveParse = move.split(" ");
+	    int [] startPiece = ChessHelper.stringToCoordinate(moveParse[0]);
+	    int [] endPiece = ChessHelper.stringToCoordinate(moveParse[1]);
+	    if(!(this.chessBoard[startPiece[0]][startPiece[1]].piece.getName() == 'K') || !this.chessBoard[startPiece[0]][startPiece[1]].piece.isFirstMove()) return false;
+	    if(Math.abs(startPiece[1]-endPiece[1])!= 2) return false;
+	    if(moveDirection == 1) {
+	        if(!(this.chessBoard[endPiece[0]][endPiece[1] - 2].piece.getName() == 'R') || !this.chessBoard[endPiece[0]][endPiece[1] - 2].piece.isFirstMove()) return false;
+	
+	    }
+	    else if(moveDirection == 2) {
+	        if(!(this.chessBoard[endPiece[0]][endPiece[1] + 1].piece.getName() == 'R') || !this.chessBoard[endPiece[0]][endPiece[1] + 1].piece.isFirstMove()) return false;
+	    }
+	    else{
+	        if(pieceInPath(move) || this.chessBoard[endPiece[0]][endPiece[1]].piece != null) return false;
+	    }
+	
+	    return true;
+	
+	
+	}
+
+	public ChessPiece getPromotion(String special, char playersTurnColor) {
         if(special == null) special = "Q";
         switch(special.toLowerCase().charAt(0)) {
             case 'r' :
