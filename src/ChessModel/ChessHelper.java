@@ -107,7 +107,7 @@ public class ChessHelper {
 		char startFile = move.charAt(0);
 		char endFile = move.charAt(3);
 		
-		return ((Math.abs(startRank-endRank)+ Math.abs(startFile-endFile)) == 1);
+		return ((Math.abs(startRank-endRank)+ Math.abs(startFile-endFile)) ==1);
 	}
 
 }

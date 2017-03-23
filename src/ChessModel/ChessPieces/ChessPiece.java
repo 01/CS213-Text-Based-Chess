@@ -52,6 +52,11 @@ public abstract class ChessPiece extends GamePiece {
 	public void setChecked(boolean b) {
 		
 	}
+	
+	public void setFirstMove() {
+		
+	}
+	
 
 	public boolean getIsChecked() {
 		// TODO Auto-generated method stub

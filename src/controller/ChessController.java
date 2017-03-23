@@ -13,6 +13,10 @@ public class ChessController {
 		this.playersColor = 'w';
 	}
 	
+	public boolean isCheck(String location, char playersTurnColor) {
+		return board.isCheck(location, playersTurnColor);
+	}
+	
 	public boolean isWhiteTurn() {
 		return (this.playersColor == 'w') ? true: false;
 	}
