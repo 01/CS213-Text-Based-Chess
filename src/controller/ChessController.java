@@ -106,7 +106,7 @@ public class ChessController {
 	}
 	
 	public void printPrompt() {
-		System.out.print(this.isWhiteTurn() ? "\nWhite's turn: " : "Black's turn: ");
+		System.out.print(this.isWhiteTurn() ? "\nWhite's turn: " : "\nBlack's turn: ");
 	}
 	
 }

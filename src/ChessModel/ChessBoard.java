@@ -167,6 +167,7 @@ public class ChessBoard extends GameBoard{
     public void printChessBoard() {
         //System.out.println("\n-----------------------------");
         //System.out.println("Initial Positions");
+    	System.out.print("\n");
         for(int i = 0; i < rows; i++) {
             for(int k =0; k < columns; k++) {
                 if(this.chessBoard[i][k].piece!=null)System.out.print(this.chessBoard[i][k].piece.getColor() +""+ this.chessBoard[i][k].piece.getName());
@@ -196,7 +197,12 @@ public class ChessBoard extends GameBoard{
             if(endSquare.piece.getColor() == playersTurnColor) return false;
             if(endSquare.piece.getColor() != playersTurnColor) isCapturing = true;
         }
-        if(startSquare.piece instanceof King && !isSafe(moveParse[1], playersTurnColor)) return false;
+        if(startSquare.piece instanceof King) {
+        	if(!isSafe(moveParse[1], playersTurnColor)) {
+        		System.out.println("Ends up here");
+        		return false;
+        	}
+        }
 
         //enPasse Check
         if(startSquare.piece instanceof Pawn) {
@@ -251,7 +257,7 @@ public class ChessBoard extends GameBoard{
         ChessBoardSquare startSquare = this.chessBoard[startPiece[0]][startPiece[1]];
         ChessBoardSquare endSquare = this.chessBoard[endPiece[0]][endPiece[1]];
 
-        System.out.println("Make move1: " + move);
+       // System.out.println("Make move1: " + move);
 
         if(!this.attemptMove(move, playersTurnColor)) {
         	 //System.out.println("Attempt2222: " + move + " ");
@@ -285,12 +291,13 @@ public class ChessBoard extends GameBoard{
         }
 
    
-        if(isCheck(moveParse[1], playersTurnColor)) System.out.println("Check");
+       // if(isCheck(moveParse[1], playersTurnColor)) System.out.println("Check");
         this.chessBoard[endPiece[0]][endPiece[1]].piece.setFirstMove();
         return true;
     }
     
     public boolean isCheck(String location, char playersTurnColor) {
+    //	System.out.println("Check: " + location + " " + playersTurnColor);
     	int [] startPiece = ChessHelper.stringToCoordinate(location); 
     	ChessBoardSquare opponentKingSquare = (playersTurnColor == 'b') ? this.whiteKingSquare: this.blackKingSquare;
     	ChessPiece Piece = this.chessBoard[startPiece[0]][startPiece[1]].piece;
@@ -308,36 +315,39 @@ public class ChessBoard extends GameBoard{
     	if(!checkedKingSquare.piece.getIsChecked()) return false;
     	// Check possible moves
     	String possibleLocation = checkedKingSquare.file + "" + checkedKingSquare.rank;
-    	System.out.println("Testing0: " + possibleLocation);
+    	//System.out.println("Testing0: " + possibleLocation + playersTurnColor);
     	// Check moving vertical up
     	possibleLocation = checkedKingSquare.file +  "" + (char)(checkedKingSquare.rank +1);
-    	System.out.println("Testing1: " + possibleLocation);
-		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing2: " + possibleLocation);
+    	//System.out.println("Testing1: " + possibleLocation);
+		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) {
+			System.out.println(possibleLocation + "returning false");
+			return false;
+		}
+		//System.out.println("Testing2: " + possibleLocation);
 		// Check moving vertical down
 		possibleLocation = checkedKingSquare.file +  "" + (char)(checkedKingSquare.rank - 1);
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing: " + possibleLocation);
+		//System.out.println("Testing: " + possibleLocation);
 		// Checking moving horiztonal right
 		possibleLocation = (char)(checkedKingSquare.file +1) +  "" + checkedKingSquare.rank;
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing: " + possibleLocation);
+		//System.out.println("Testing: " + possibleLocation);
 		//Check moving horiztonal left
 		possibleLocation = (char)(checkedKingSquare.file -1) +  "" + checkedKingSquare.rank;
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing: " + possibleLocation);
+		//System.out.println("Testing: " + possibleLocation);
 		//Check moving diagonal top right
 		possibleLocation = (char)(checkedKingSquare.file +1) +  "" + (char)(checkedKingSquare.rank+1);
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing: " + possibleLocation);
+		//System.out.println("Testing: " + possibleLocation);
 		//Check moving diagonal top left
 		possibleLocation = (char)(checkedKingSquare.file -1) +  "" + (char)(checkedKingSquare.rank+1);
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing: " + possibleLocation);
+		//System.out.println("Testing: " + possibleLocation);
 		//Check moving diagonal bottom right
 		possibleLocation = (char)(checkedKingSquare.file +1) +  "" + (char)(checkedKingSquare.rank-1);
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
-		System.out.println("Testing: " + possibleLocation);	
+		//System.out.println("Testing: " + possibleLocation);	
 		//Check moving diagonal bottom left
 		possibleLocation = (char)(checkedKingSquare.file -1) +  "" + (char)(checkedKingSquare.rank -1);
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
@@ -379,17 +389,18 @@ public class ChessBoard extends GameBoard{
    
 
     public boolean isSafe(String kingLoc, char playersTurnColor) {
-	  System.out.println("IsSafe: " + kingLoc + " " + playersTurnColor);
-      ChessBoardSquare current;
+	  //System.out.println("IsSafe: " + kingLoc + " " + playersTurnColor);
+      char color = (playersTurnColor == 'b') ? 'w': 'b';
+	  ChessBoardSquare current;
 	  String start;
 	  for(int i = 0; i < rows; i++) {
 		  for(int k = 0; k < columns; k++) {
 			   current = this.chessBoard[i][k];
-			   if(current.piece != null) {
+			   if(current.piece != null && !(current.piece instanceof King) ) {
 				   if(current.piece.getColor() != playersTurnColor) {
 					   start = current.file + "" + current.rank;
-					 // System.out.println("Attempt move :" + start + " " + kingLoc);
-					   if(attemptMove(start + " " + kingLoc, (playersTurnColor == 'b') ? 'w' : 'b')) return false;
+					 
+					   if(attemptMove(start + " " + kingLoc, color)) return false;
 				   }
 			   }			   
 		  }

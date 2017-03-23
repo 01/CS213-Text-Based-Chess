@@ -24,7 +24,11 @@ public class Chess {
 			game.printPrompt();
 			String command = input.nextLine();
 			game.giveCommand(command);
-
+			if(game.isCheck(command.substring(3,5), game.isWhiteTurn() ? 'b':'w')) {
+				//System.out.println("isCheck checking");
+				if(game.isCheckMate(game.isWhiteTurn() ? 'w':'b'))System.out.println(game.isWhiteTurn() ? "Black Wins!" : "White Wins!");
+				else System.out.println("Check");
+			}
 	}
 
 
