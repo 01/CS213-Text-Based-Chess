@@ -1,5 +1,7 @@
 package ChessModel;
 
+import java.util.ArrayList;
+
 import ChessModel.ChessPieces.*;
 import GameModel.GameBoard;
 
@@ -193,7 +195,7 @@ public class ChessBoard extends GameBoard{
             if(endSquare.piece.getColor() == playersTurnColor) return false;
             if(endSquare.piece.getColor() != playersTurnColor) isCapturing = true;
         }
-        if(startSquare.piece instanceof King && !isSafe(moveParse[0], playerTurnsColor) return false;
+        if(startSquare.piece instanceof King && !isSafe(moveParse[0], playersTurnColor)) return false;
         //enPasse Check
         else if(startSquare.piece.getName() == 'P' && (endPiece[1] == 3 || endPiece[1] == 6) && ChessHelper.isDiagonal(move)) {
             if(startPiece[1] > endPiece[1]) {
@@ -268,9 +270,8 @@ public class ChessBoard extends GameBoard{
             else this.whiteKingSquare = this.chessBoard[endPiece[0]][endPiece[1]];
         }
 
-        System.out.println("/////////////////////////////");
-        System.out.println(isCheck(moveParse[1], playersTurnColor));
-        System.out.println("/////////////////////////////");
+   
+        if(isCheck(moveParse[1], playersTurnColor)) System.out.println("Check");
 
         return true;
     }
@@ -292,6 +293,7 @@ public class ChessBoard extends GameBoard{
     	if(!checkedKingSquare.piece.getIsChecked()) return false;
     	// Check possible moves
     	String possibleLocation = checkedKingSquare.file + "" + checkedKingSquare.rank;
+    	System.out.println("Testing: " + possibleLocation);
     	// Check moving vertical up
     	possibleLocation = checkedKingSquare.file +  "" + (checkedKingSquare.rank + 1);
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
@@ -325,6 +327,36 @@ public class ChessBoard extends GameBoard{
 		if(ChessHelper.isValidCoordinates(possibleLocation) && isSafe(possibleLocation, playersTurnColor)) return false;
 		
 		// If King cant move, find pieces putting it in check and see if they can be attacked
+		int checkedByPieces = 0;
+		String checkedByPieceLoc = null;
+		
+		ChessBoardSquare current, checkedByPieceSquare = null;
+		String kingLoc = checkedKingSquare.file + "" + checkedKingSquare.rank;
+		String start;
+		for(int i = 0; i < columns; i++) {
+			  for(int k = 0; k < rows; k++) {
+				   current = this.chessBoard[k][i];
+				   if(current.piece != null) {
+					   if(current.piece.getColor() != playersTurnColor) {
+						   start = current.file + "" + current.rank;
+						   if(current.piece.isValidMove(start + " " + kingLoc, true)) {
+							   checkedByPieceLoc = start;
+							   checkedByPieceSquare = current;
+							   checkedByPieces++;
+						   }
+					
+						   if(checkedByPieces > 1) return true;
+					   }
+				   }			   
+			  }
+		 }
+	
+		if(checkedByPieceSquare.piece != null && checkedByPieceLoc != null) {
+			if(!isSafe(checkedByPieceLoc, playersTurnColor)) return true;
+		}
+		
+		return false;
+		
     	
     }
 

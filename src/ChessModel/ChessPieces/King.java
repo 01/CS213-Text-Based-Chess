@@ -1,5 +1,7 @@
 package ChessModel.ChessPieces;
 
+import java.util.ArrayList;
+
 import ChessModel.ChessHelper;
 
 /**
@@ -12,11 +14,13 @@ public class King extends ChessPiece {
 	public static String name = "King";
     private boolean firstMove = true;
     private boolean isChecked = false;
+    ArrayList<String> checkedBy = new ArrayList<String>();
 
     public King(char color) {
         super(name, color);
     }
     
+  
     public void setChecked(boolean check) {
     	this.isChecked = check;
     }

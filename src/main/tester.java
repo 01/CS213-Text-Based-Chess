@@ -32,6 +32,7 @@ public class tester {
 				}
 				System.out.print(command + "\n");
 				game.giveCommand(command);
+				if(game.isCheckMate(game.isWhiteTurn() ? 'w':'b')) System.out.println(game.isWhiteTurn() ? "Black Wins!" : "White Wins!");
 				
 			}
     	}

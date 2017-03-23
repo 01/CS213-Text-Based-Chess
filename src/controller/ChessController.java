@@ -21,6 +21,16 @@ public class ChessController {
 		this.gameOver = true;
 	}
 	
+	public boolean isCheckMate(char playersTurnColor) {
+		
+		if(this.board.isCheckMate(playersTurnColor)) {
+			this.gameOver =true;
+			return true;
+		}	
+		
+		return false;
+	}
+	
 	public boolean makeMove(String move) {
 		return this.board.makeMove(move, this.playersColor);
 	}
